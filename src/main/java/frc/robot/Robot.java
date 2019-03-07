@@ -22,8 +22,6 @@ import frc.robot.subsystems.ElevatorSensors;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.UltrasonicSensors;
 import frc.robot.subsystems.LED;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Wrist;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,7 +34,6 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain drive;
   public static Elevator elevator;
-  public static Wrist wrist;
   public static LED led;
   public static Limelight limelight;
   public static ElevatorSensors elevatorSensors;
@@ -57,7 +54,6 @@ public class Robot extends TimedRobot {
     elevator = new Elevator();
     limelight = new Limelight();
     led = new LED();
-    wrist = new Wrist();
     elevatorSensors = new ElevatorSensors();
     ultrasonicSensors = new UltrasonicSensors();
     oi = new OI();
