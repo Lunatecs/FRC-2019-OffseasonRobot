@@ -17,9 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class HatchIntake extends Subsystem {
   //TODO fix solenoid forward and reverse channels
-  public DoubleSolenoid hatchWristSolenoid = new DoubleSolenoid(0,0),
-                        //TODO Find better name for extend/retract solenoid
-                        hatchExtendSolenoid = new DoubleSolenoid(0,0);
+  public DoubleSolenoid hatchExtendSolenoid = new DoubleSolenoid(0,0);
 
   //TODO fix CAN value
   public TalonSRX hatchWheel = new TalonSRX(0);
@@ -36,14 +34,6 @@ public class HatchIntake extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-  }
-  //TODO correct forward and reverse of solenoids to the right actions
-  public void raiseHatchIntake(){
-    hatchWristSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void lowerHatchIntake(){
-    hatchWristSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void extendHatchIntake(){
