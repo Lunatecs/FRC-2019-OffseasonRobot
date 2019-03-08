@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.climber.DefaultClimberCommand;
@@ -20,8 +22,10 @@ public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  VictorSPX lift = new VictorSPX(RobotMap.CLIMBER_LIFT_CONTROLLER_V_ID);
-  VictorSPX pull = new VictorSPX(RobotMap.CLIMBER_PULL_CONTROLLER_V_ID);
+  //TODO: set can id
+  TalonSRX lift = new TalonSRX(0);
+  //TODO: set can id for forward and reverse
+  DoubleSolenoid arms = new DoubleSolenoid(0, 1);
 
 
   public void setLiftSpeed(double newSpeed){
@@ -30,22 +34,12 @@ public class Climber extends Subsystem {
 
   }
 
-  public void setPullSpeed(double newSpeed){
-
-    lift.set(ControlMode.PercentOutput, newSpeed);
-
+  public void lowerArms() {
+    arms.set(DoubleSolenoid.Value.kForward);
   }
 
-  public double getLiftOutputCurrent(){
-
-    return lift.getMotorOutputVoltage();
-
-  }
-
-  public double getPullOutputCurrent(){
-
-    return pull.getMotorOutputVoltage();
-
+  public void raiseArms() {
+    arms.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override

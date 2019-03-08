@@ -21,7 +21,6 @@ public class DefaultClimberCommand extends Command {
   @Override
   protected void initialize() {
     Robot.climber.setLiftSpeed(0.0);
-    Robot.climber.setPullSpeed(0.0);
   }
 
   // Called repeatedly when this Command is scheduled to run
