@@ -24,14 +24,21 @@ public class Climber extends Subsystem {
 
   //TODO: set can id
   TalonSRX lift = new TalonSRX(0);
+  //TODO: set can id
+  VictorSPX drive = new VictorSPX(0);
   //TODO: set can id for forward and reverse
   DoubleSolenoid arms = new DoubleSolenoid(0, 1);
+
 
 
   public void setLiftSpeed(double newSpeed){
 
     lift.set(ControlMode.PercentOutput, newSpeed);
 
+  }
+
+  public void setDriveSpeed(double newSpeed) {
+    drive.set(ControlMode.PercentOutput, newSpeed);
   }
 
   public void lowerArms() {
