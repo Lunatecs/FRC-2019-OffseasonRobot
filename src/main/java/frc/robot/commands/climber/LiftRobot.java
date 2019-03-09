@@ -30,7 +30,10 @@ public class LiftRobot extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
     this.isFinished = false;
+    this.isClimberExtendFinished = false;
+    this.isElevatorFinished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -53,6 +56,13 @@ public class LiftRobot extends Command {
     } else {
       Robot.elevator.setSpeed(this.elevatorSpeed);
       isElevatorFinished = false;
+    }
+
+    //------------------Check------------------
+    if(isClimberExtendFinished && isElevatorFinished) {
+      isFinished = true;
+    } else {
+      isFinished = false;
     }
   }
 
