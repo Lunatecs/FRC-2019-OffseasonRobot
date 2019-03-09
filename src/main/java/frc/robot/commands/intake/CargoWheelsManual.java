@@ -9,12 +9,12 @@ package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.Robot;
 
 public class CargoWheelsManual extends Command {
 
   private boolean applyConstantIntake = false;
-  public boolean debug = false;
 
   public CargoWheelsManual() {
     // Use requires() here to declare subsystem dependencies
@@ -24,13 +24,14 @@ public class CargoWheelsManual extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    this.applyConstantIntake = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     double intakeSpeed = Robot.oi.getIntakeCargoSpeed();
-    double launchSpeed = Robot.oi.getIntakeCargoSpeed();
+    double launchSpeed = Robot.oi.getLaunchCargoSpeed();
 
     //TODO check if wheels are spinning right direction 
     if(intakeSpeed > 0.2) {
@@ -38,6 +39,7 @@ public class CargoWheelsManual extends Command {
       this.applyConstantIntake = true;
     } else if(launchSpeed > 0.2) {
       Robot.cargoIntake.setCargoWheelSpeed(launchSpeed);
+      this.applyConstantIntake = false;
     } else {
       if(applyConstantIntake) {
         Robot.cargoIntake.setCargoWheelSpeed(-0.25);
@@ -46,7 +48,7 @@ public class CargoWheelsManual extends Command {
       }
     }
 
-    if (debug) {
+    if (RobotMap.debug) {
       SmartDashboard.putNumber("Intake", intakeSpeed);
       SmartDashboard.putNumber("Launch", launchSpeed);
     }

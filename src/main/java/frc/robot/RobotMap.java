@@ -15,6 +15,8 @@ package frc.robot;
  */
 public class RobotMap {
  
+  public static boolean debug = false;
+
   //MOST OF THESE ARE IDs, KEEP THIS IN MIND DURING PROGRAMMING
 
   public static int LEFT_CENTER_DRIVE_T_ID  = 16;
