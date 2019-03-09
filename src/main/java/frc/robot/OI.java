@@ -109,12 +109,12 @@ public class OI {
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
 
   }
-  /*
+  
   public double getClimbSpeed(){
 
     return this.operatorJoystick.getRawAxis(RobotMap.RIGHT_JOY_Y_ID);
 
-  }*/
+  }
 
   public double getIntakeCargoSpeed(){
     return this.operatorJoystick.getRawAxis(RobotMap.RIGHT_TRIGGER_ID);
