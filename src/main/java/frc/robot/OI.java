@@ -17,6 +17,11 @@ import frc.robot.button.LoneJoystickButton;
 import frc.robot.button.LonePOVButton;
 import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
+import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
+import frc.robot.commands.intake.cargo.DownCargo;
+import frc.robot.commands.intake.cargo.UpCargo;
+import frc.robot.commands.intake.hatch.ExtendHatch;
+import frc.robot.commands.intake.hatch.RetractHatch;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -69,6 +74,15 @@ public class OI {
     
     driverRedButton.whileActive(new AutoDrivetrain(12));
     climbButtons.whileActive(new AutoClimb());
+    
+    //TODO Make sure grab and launch are going the right directions
+    yellowButton.whileActive(new GrabAndLaunchHatchManual(0.5));
+    greenButton.whileActive(new GrabAndLaunchHatchManual(-0.5));
+    redButton.whenActive(new ExtendHatch());
+    blueButton.whenActive(new RetractHatch());
+
+    upPOV.whenActive(new UpCargo());
+    downPOV.whenActive(new DownCargo());
 
   }
 
