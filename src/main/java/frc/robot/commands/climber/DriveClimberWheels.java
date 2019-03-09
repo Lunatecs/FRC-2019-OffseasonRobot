@@ -5,42 +5,60 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.led;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.LED;
+//import frc.robot.subsystems.Climber;
 
-public class SetLEDColor extends Command {
-
-  private double color = 0;
-
-  public SetLEDColor(double color) {
+public class DriveClimberWheels extends Command {
+  public DriveClimberWheels() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.led);
-    this.color = color;
+    // eg. requires(chassis);
+
+    requires(Robot.climber);
+    requires(Robot.drive);
   }
+
+  private static final double CLIMBERWHEELSPEED = 0.5;
+  private static final double DRIVESPEED = 0.5;
+  private boolean isFinished = false;
+  private static final double DISTANCE_TO_WALL = 20.0;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.led.setColor(this.color);
+    isFinished = false;
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Robot.ultrasonicSensors.getRange() > DISTANCE_TO_WALL){
+      Robot.climber.setDriveSpeed(CLIMBERWHEELSPEED);
+      Robot.drive.arcadeDrive(DRIVESPEED, 0);
+
+    } else {
+      Robot.climber.setDriveSpeed(0);
+      Robot.drive.arcadeDrive(0, 0);
+      isFinished = true;
+      
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+  
+    return isFinished;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.climber.setDriveSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
@@ -48,12 +66,4 @@ public class SetLEDColor extends Command {
   @Override
   protected void interrupted() {
   }
-
-    //TODO Make sure this works!!!!!!!!!
-  @Override
-  public void cancel() {
-    super.cancel();
-    Robot.led.activateDefaultColors();
-  }
-
 }
