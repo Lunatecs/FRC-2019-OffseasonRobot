@@ -52,14 +52,16 @@ public class Robot extends TimedRobot {
    * used for any initialization code.
    */
   @Override
-  public void robotInit() {
-    climber = new Climber();
+  public void robotInit() {   
     drive = new DriveTrain();
     elevator = new Elevator();
-    limelight = new Limelight();
+    cargoIntake = new CargoIntake();
+    hatchIntake = new HatchIntake();
     led = new LED();
+    limelight = new Limelight();
     elevatorSensors = new ElevatorSensors();
     ultrasonicSensors = new UltrasonicSensors();
+    climber = new Climber();
     oi = new OI();
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
