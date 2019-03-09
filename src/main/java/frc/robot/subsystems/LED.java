@@ -20,6 +20,7 @@ public class LED extends Subsystem {
   
   public static final double SOLID_GREEN = 0.77;
   public static final double SOLID_RED = 0.61;  
+  public static final double SOLID_BLUE = 0.87;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
@@ -31,6 +32,10 @@ public class LED extends Subsystem {
 
   public double getColor() {
     return ledControl.get();
+  }
+
+  public void activatedDefualtColors() {
+    ledControl.set(LED.SOLID_BLUE);
   }
 
   @Override
