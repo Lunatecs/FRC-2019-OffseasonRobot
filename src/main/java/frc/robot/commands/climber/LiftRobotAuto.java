@@ -10,7 +10,7 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftRobot extends Command {
+public class LiftRobotAuto extends Command {
 
   //Speed should be 0.5
   private double climberSpeed = 0.0;
@@ -20,7 +20,7 @@ public class LiftRobot extends Command {
   private boolean isElevatorFinished = false;
 
 
-  public LiftRobot(double climberSpeed) {
+  public LiftRobotAuto(double climberSpeed) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.climber);
     this.climberSpeed = climberSpeed;
