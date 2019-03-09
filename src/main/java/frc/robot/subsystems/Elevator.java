@@ -151,6 +151,14 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Rev", rev);
   }
 
+  public boolean isRevLimitSwitchClosed() {
+    return leader.getSensorCollection().isRevLimitSwitchClosed();
+  }
+
+  public boolean isFwdLimitSwitchClosed() {
+    return leader.getSensorCollection().isFwdLimitSwitchClosed();
+  }
+
   public void setHeight(int ticks) {
     //Will, I would prefer if we didn't have ticks in the shop, most of us are already sick.
     leader.set(ControlMode.Position, ticks);
