@@ -13,13 +13,18 @@ import frc.robot.Robot;
 public class LiftRobot extends Command {
 
   //Speed should be 0.5
-  private double speed = 0.0;
+  private double climberSpeed = 0.0;
+  private double elevatorSpeed = 0.0;
   private boolean isFinished = false;
+  private boolean isClimberExtendFinished = false;
+  private boolean isElevatorFinished = false;
 
-  public LiftRobot(double speed) {
+
+  public LiftRobot(double climberSpeed) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.climber);
-    this.speed = speed;
+    this.climberSpeed = climberSpeed;
+    this.elevatorSpeed = this.climberSpeed * 0.577;
   }
 
   // Called just before this Command runs the first time
@@ -31,13 +36,23 @@ public class LiftRobot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //------------------Climber------------------
     if(Robot.climber.getLimitSwitch() == true) {
       //TODO needs a minimum lift speed to keep us up
       Robot.climber.setLiftSpeed(0); 
-      this.isFinished = true;
+      this.isClimberExtendFinished = true;
     } else {
-      Robot.climber.setLiftSpeed(this.speed);
-      this.isFinished = false;
+      Robot.climber.setLiftSpeed(this.climberSpeed);
+      this.isClimberExtendFinished = false;
+    }
+
+    //------------------Elevator------------------
+    if(Robot.elevator.isFwdLimitSwitchClosed() == true) {
+      Robot.elevator.setSpeed(0.0);
+      isElevatorFinished = true; 
+    } else {
+      Robot.elevator.setSpeed(this.elevatorSpeed);
+      isElevatorFinished = false;
     }
   }
 
