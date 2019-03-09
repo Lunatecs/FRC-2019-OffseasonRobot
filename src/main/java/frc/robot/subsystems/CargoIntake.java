@@ -18,8 +18,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class CargoIntake extends Subsystem {
   
-  //TODO fix solenoid forward and reverse channels
-  public DoubleSolenoid cargoWristSolenoid = new DoubleSolenoid(0, 0);
+  //TODO make sure solenoids are pushing/pulling correctly 
+  public DoubleSolenoid cargoWristSolenoid = new DoubleSolenoid(5, 2);
 
   //TODO fix CAN value
   public TalonSRX cargoWheel = new TalonSRX(0);

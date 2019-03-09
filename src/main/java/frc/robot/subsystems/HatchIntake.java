@@ -16,8 +16,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
 public class HatchIntake extends Subsystem {
-  //TODO fix solenoid forward and reverse channels
-  private DoubleSolenoid hatchSliderSolenoid = new DoubleSolenoid(0,0);
+  //TODO make sure solenoids are pushing/pulling correctly
+  private DoubleSolenoid hatchSliderSolenoid = new DoubleSolenoid(0,7);
 
   //TODO fix CAN value
   private TalonSRX hatchWheel = new TalonSRX(0);
