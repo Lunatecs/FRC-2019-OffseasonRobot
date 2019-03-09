@@ -45,6 +45,9 @@ public class RobotMap {
   public static int WRIST_FORWARD_ID = 5;
   public static int WRIST_BACKWARD_ID = 2;
 
+  public static int CLARMS_FORWARD_ID = 6;
+  public static int CLARMS_BACKWARD_ID = 1;
+
   //buttons
   public static int DRIVER_JOYSTICK_USB_ID = 0;
   public static int OPERATOR_JOYSTICK_USB_ID = 1;

@@ -23,11 +23,11 @@ public class Climber extends Subsystem {
   // here. Call these from Commands.
 
   //TODO: set can id
-  TalonSRX lift = new TalonSRX(0);
+  TalonSRX lift = new TalonSRX(RobotMap.CLIMBER_PUSHDOWN_CONTROLLER_V_ID);
   //TODO: set can id
-  VictorSPX drive = new VictorSPX(0);
+  VictorSPX drive = new VictorSPX(RobotMap.CLIMBER_DRIVE_CONTROLLER_V_ID);
   //TODO: set can id for forward and reverse
-  DoubleSolenoid arms = new DoubleSolenoid(0, 1);
+  DoubleSolenoid arms = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
 
 
 
