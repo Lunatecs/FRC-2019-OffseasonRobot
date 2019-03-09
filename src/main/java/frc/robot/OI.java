@@ -15,6 +15,7 @@ import frc.robot.button.DoubleJoystickButton;
 import frc.robot.button.DoublePOVButton;
 import frc.robot.button.LoneJoystickButton;
 import frc.robot.button.LonePOVButton;
+import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -40,6 +41,8 @@ public class OI {
   JoystickButton yellowButton = new JoystickButton(operatorJoystick, RobotMap.YELLOW_BUTTON_ID);
   JoystickButton rightBumperButton = new JoystickButton(operatorJoystick, RobotMap.RIGHT_BUMPER_ID);
   JoystickButton leftBumperButton = new JoystickButton(operatorJoystick, RobotMap.LEFT_BUMPER_ID);
+  JoystickButton leftSelect = new JoystickButton(operatorJoystick, RobotMap.LEFT_SELECT_ID);
+  JoystickButton rightSelect = new JoystickButton(this.operatorJoystick, RobotMap.RIGHT_SELECT_ID);
 
   DoubleJoystickButton leftYellowButton = new DoubleJoystickButton(leftBumperButton, yellowButton);
   DoubleJoystickButton leftRedButton = new DoubleJoystickButton(leftBumperButton, redButton);
@@ -60,11 +63,12 @@ public class OI {
   POVButton rightPOV = new POVButton(this.operatorJoystick, 90);
   POVButton downPOV = new POVButton(this.operatorJoystick, 180);
 
-
+  DoubleJoystickButton climbButtons = new DoubleJoystickButton(this.rightSelect, this.leftSelect);
 
   public OI(){
     
     driverRedButton.whileActive(new AutoDrivetrain(12));
+    climbButtons.whileActive(new AutoClimb());
 
   }
 
@@ -85,12 +89,12 @@ public class OI {
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
 
   }
-
+  /*
   public double getClimbSpeed(){
 
     return this.operatorJoystick.getRawAxis(RobotMap.RIGHT_JOY_Y_ID);
 
-  }
+  }*/
 
   public double getIntakeCargoSpeed(){
     return this.operatorJoystick.getRawAxis(RobotMap.RIGHT_TRIGGER_ID);
@@ -99,19 +103,4 @@ public class OI {
   public double getLaunchCargoSpeed(){
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_TRIGGER_ID);
   }
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }
