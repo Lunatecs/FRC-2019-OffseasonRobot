@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.intake.hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class UpCargo extends Command {
-  public UpCargo() {
+public class RetractHatch extends Command {
+  public RetractHatch() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoIntake);
+    requires(Robot.hatchIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoIntake.raiseCargoIntake();
+    Robot.hatchIntake.retractHatchIntake();
   }
 
   // Called repeatedly when this Command is scheduled to run
