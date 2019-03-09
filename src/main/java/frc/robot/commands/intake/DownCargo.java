@@ -12,9 +12,8 @@ import frc.robot.Robot;
 
 public class DownCargo extends Command {
   public DownCargo() {
-    requires(Robot.cargoIntake);
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.cargoIntake);
   }
 
   // Called just before this Command runs the first time
