@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.intake.cargo.CargoWheelsManual;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -18,11 +19,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class CargoIntake extends Subsystem {
   
-  //TODO make sure solenoids are pushing/pulling correctly 
-  public DoubleSolenoid cargoWristSolenoid = new DoubleSolenoid(5, 2);
+
+  //TODO fix solenoid forward and reverse channels
+  public DoubleSolenoid cargoWristSolenoid = new DoubleSolenoid(RobotMap.WRIST_FORWARD_ID, RobotMap.WRIST_BACKWARD_ID);
 
   //TODO fix CAN value
-  public TalonSRX cargoWheel = new TalonSRX(0);
+  public TalonSRX cargoWheel = new TalonSRX(RobotMap.INTAKE_CARGO_CONTROLLER_T_ID);
   public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
 
   //constructor

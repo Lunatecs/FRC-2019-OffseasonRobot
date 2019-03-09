@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -16,11 +17,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
 public class HatchIntake extends Subsystem {
-  //TODO make sure solenoids are pushing/pulling correctly
-  private DoubleSolenoid hatchSliderSolenoid = new DoubleSolenoid(0,7);
+
+  //TODO fix solenoid forward and reverse channels
+  private DoubleSolenoid hatchSliderSolenoid = new DoubleSolenoid(RobotMap.SLIDER_FORWARD_ID, RobotMap.SLIDER_BACKWARD_ID);
 
   //TODO fix CAN value
-  private TalonSRX hatchWheel = new TalonSRX(0);
+  private TalonSRX hatchWheel = new TalonSRX(RobotMap.INTAKE_HATCH_CONTROLLER_T_ID);
   private NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
 
   //constructor
