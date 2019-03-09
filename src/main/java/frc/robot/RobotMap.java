@@ -27,19 +27,25 @@ public class RobotMap {
   public static int RIGHT_BACK_DRIVE_V_ID   = 2;
   public static int RIGHT_FRONT_DRIVE_V_ID  = 3;
 
-
-  public static int INTAKE_TOP_CONTROLLER_T_ID    = 12;
-  public static int INTAKE_BOTTOM_CONTROLLER_T_ID = 5;
-  public static int INTAKE_WRIST_CONTROLLER_T_ID  = 9;
-
+  public static int INTAKE_CARGO_CONTROLLER_T_ID = 12;
+  public static int INTAKE_HATCH_CONTROLLER_T_ID = 5;
+  
   public static int ELEVATOR_LEAD_CONTROLLER_T_ID   = 7;
   public static int ELEVATOR_FOLLOW_CONTROLLER_V_ID = 6;
-
-  //right
-  public static int CLIMBER_PULL_CONTROLLER_V_ID = 19; //4;
+  
+  //right back climb
+  public static int CLIMBER_PUSHDOWN_CONTROLLER_V_ID = 19; //4;
   //left
-  public static int CLIMBER_LIFT_CONTROLLER_V_ID  = 13;
+  public static int CLIMBER_DRIVE_CONTROLLER_V_ID  = 13;
 
+  //solenoids
+  public static int SLIDER_FORWARD_ID = 0;
+  public static int SLIDER_BACKWARD_ID = 7;
+
+  public static int WRIST_FORWARD_ID = 5;
+  public static int WRIST_BACKWARD_ID = 2;
+
+  //buttons
   public static int DRIVER_JOYSTICK_USB_ID = 0;
   public static int OPERATOR_JOYSTICK_USB_ID = 1;
 
