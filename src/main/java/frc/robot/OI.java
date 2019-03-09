@@ -22,6 +22,9 @@ import frc.robot.commands.intake.cargo.DownCargo;
 import frc.robot.commands.intake.cargo.UpCargo;
 import frc.robot.commands.intake.hatch.ExtendHatch;
 import frc.robot.commands.intake.hatch.RetractHatch;
+import frc.robot.commands.led.SetLEDColor;
+import frc.robot.subsystems.LED;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -76,10 +79,13 @@ public class OI {
     climbButtons.whileActive(new AutoClimb());
     
     //TODO Make sure grab and launch are going the right directions
-    yellowButton.whileActive(new GrabAndLaunchHatchManual(0.5));
-    greenButton.whileActive(new GrabAndLaunchHatchManual(-0.5));
-    redButton.whenActive(new ExtendHatch());
-    blueButton.whenActive(new RetractHatch());
+    loneYellowButton.whileActive(new GrabAndLaunchHatchManual(0.5));
+    loneGreenButton.whileActive(new GrabAndLaunchHatchManual(-0.5));
+    loneRedButton.whenActive(new ExtendHatch());
+    loneBlueButton.whenActive(new RetractHatch());
+
+    leftRedButton.whileActive(new SetLEDColor(LED.SOLID_RED));
+    leftGreenButton.whileActive(new SetLEDColor(LED.SOLID_GREEN));
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());

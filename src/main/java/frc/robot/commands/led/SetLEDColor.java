@@ -48,4 +48,12 @@ public class SetLEDColor extends Command {
   @Override
   protected void interrupted() {
   }
+
+    //TODO Make sure this works!!!!!!!!!
+  @Override
+  public void cancel() {
+    super.cancel();
+    Robot.led.activatedDefualtColors();
+  }
+
 }

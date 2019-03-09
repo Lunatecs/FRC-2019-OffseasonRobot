@@ -31,13 +31,6 @@ public class GrabAndLaunchHatchManual extends Command {
   protected void execute() {
   }
 
-  //TODO Make sure this works!!!!!!!!!
-  @Override
-  public void cancel() {
-    super.cancel();
-    Robot.hatchIntake.setHatchWheelSpeed(0);
-  }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
@@ -54,4 +47,12 @@ public class GrabAndLaunchHatchManual extends Command {
   @Override
   protected void interrupted() {
   }
+
+  //TODO Make sure this works!!!!!!!!!
+  @Override
+  public void cancel() {
+    super.cancel();
+    Robot.hatchIntake.setHatchWheelSpeed(0);
+  }
+
 }
