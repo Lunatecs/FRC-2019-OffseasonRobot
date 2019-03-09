@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class LiftRobot extends Command {
 
+  //Speed should be 0.5
   private double speed = 0.0;
   private boolean isFinished = false;
 
@@ -35,7 +36,7 @@ public class LiftRobot extends Command {
       Robot.climber.setLiftSpeed(0); 
       this.isFinished = true;
     } else {
-      Robot.climber.setLiftSpeed(1.0);
+      Robot.climber.setLiftSpeed(this.speed);
       this.isFinished = false;
     }
   }
