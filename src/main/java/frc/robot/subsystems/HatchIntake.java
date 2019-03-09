@@ -17,11 +17,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class HatchIntake extends Subsystem {
   //TODO fix solenoid forward and reverse channels
-  public DoubleSolenoid hatchExtendSolenoid = new DoubleSolenoid(0,0);
+  private DoubleSolenoid hatchExtendSolenoid = new DoubleSolenoid(0,0);
 
   //TODO fix CAN value
-  public TalonSRX hatchWheel = new TalonSRX(0);
-  public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
+  private TalonSRX hatchWheel = new TalonSRX(0);
+  private NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
 
   //constructor
   public HatchIntake() {
