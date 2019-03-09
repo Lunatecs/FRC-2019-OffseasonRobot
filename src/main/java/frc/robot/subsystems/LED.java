@@ -21,10 +21,15 @@ public class LED extends Subsystem {
   public static final double SOLID_GREEN = 0.77;
   public static final double SOLID_RED = 0.61;  
   public static final double SOLID_BLUE = 0.87;
+  public static final double DEFAULT_COLOR = 0.55;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public LED(){
+    this.activateDefaultColors();
+    
+  }
 
   public void setColor(double colorValue) {
     ledControl.set(colorValue);
@@ -34,8 +39,8 @@ public class LED extends Subsystem {
     return ledControl.get();
   }
 
-  public void activatedDefualtColors() {
-    ledControl.set(LED.SOLID_BLUE);
+  public void activateDefaultColors() {
+    ledControl.set(LED.DEFAULT_COLOR);
   }
 
   @Override

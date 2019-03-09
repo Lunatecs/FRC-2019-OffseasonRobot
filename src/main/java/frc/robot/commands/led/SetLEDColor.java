@@ -53,7 +53,7 @@ public class SetLEDColor extends Command {
   @Override
   public void cancel() {
     super.cancel();
-    Robot.led.activatedDefualtColors();
+    Robot.led.activateDefaultColors();
   }
 
 }
