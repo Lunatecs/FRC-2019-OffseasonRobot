@@ -10,11 +10,11 @@ package frc.robot.commands.intake.hatch;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GrabAndLaunchHatch extends Command {
+public class GrabAndLaunchHatchManual extends Command {
   
   private double speed = 0.0;
 
-  public GrabAndLaunchHatch(double speed) {
+  public GrabAndLaunchHatchManual(double speed) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.hatchIntake);
     this.speed = speed;
