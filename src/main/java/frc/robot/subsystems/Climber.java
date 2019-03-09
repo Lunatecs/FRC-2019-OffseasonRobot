@@ -49,6 +49,11 @@ public class Climber extends Subsystem {
     arms.set(DoubleSolenoid.Value.kReverse);
   }
 
+  //TODO add get limit switch status here
+  public boolean getLimitSwitch() {
+    return false;
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
