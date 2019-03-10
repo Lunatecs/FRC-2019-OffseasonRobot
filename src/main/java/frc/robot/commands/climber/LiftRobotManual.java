@@ -9,14 +9,14 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-
+//Controls both elevator and lift during lift period
 public class LiftRobotManual extends Command {
 
   //Speed should be 0.5
   private double climberSpeed = 0.0;
   private double elevatorSpeed = 0.0;
   private boolean isFinished = false;
-  private boolean isClimberExtendFinished = false;
+  private boolean isClimberFinished = false;
   private boolean isElevatorFinished = false;
 
 
@@ -28,10 +28,6 @@ public class LiftRobotManual extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
-    this.isFinished = false;
-    this.isClimberExtendFinished = false;
-    this.isElevatorFinished = false;
     this.climberSpeed = 0.0;
     this.elevatorSpeed = 0.0;
   }
@@ -40,41 +36,34 @@ public class LiftRobotManual extends Command {
   @Override
   protected void execute() {
 
+    //TODO add deadband?
     this.climberSpeed = Robot.oi.getClimbSpeed();
-
+    this.elevatorSpeed = (Robot.oi.getClimbSpeed() * 0.577);
+    
     //------------------Climber------------------
-    if(Robot.climber.getLimitSwitch()) {
-      //TODO needs a minimum lift speed to keep us up
+    //TODO check if negative is down and positive is up on climber or swap
+
+    //If toplimit and trying to go up(positive), stop from going up
+    if(Robot.climber.getLimitSwitchTop() && this.climberSpeed > 0) {
+
+      //TODO needs a minimum lift speed to keep us up(fighting springs)
       Robot.climber.setLiftSpeed(0); 
-      this.isClimberExtendFinished = true;
+    //If bottomlimit of trying to go down(negative), stop from going down
+    } else if(Robot.climber.getLimitSwitchBottom() && this.climberSpeed < 0) {
+      Robot.climber.setLiftSpeed(0); 
+    //Otherwise set speed to passed in speed
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);
-      this.isClimberExtendFinished = false;
     }
-
-    this.elevatorSpeed = (Robot.oi.getClimbSpeed() * 0.577);
 
     //------------------Elevator------------------
-    if(Robot.elevator.isFwdLimitSwitchClosed()) {
-      Robot.elevator.setSpeed(0.0);
-      isElevatorFinished = true; 
-    } else {
       Robot.elevator.setSpeed(this.elevatorSpeed);
-      isElevatorFinished = false;
-    }
-
-    //------------------Check------------------
-    if(isClimberExtendFinished && isElevatorFinished) {
-      isFinished = true;
-    } else {
-      isFinished = false;
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isFinished;
+    return false;
   }
 
   // Called once after isFinished returns true
