@@ -31,7 +31,13 @@ public class LiftClimber extends Command {
   @Override
   protected void execute() {
     //------------------Climber------------------
-    
+    if (Robot.climber.getLimitSwitchTop()) {
+      Robot.climber.setLiftSpeed(0);
+      isFinished = true;
+    } else {
+      Robot.climber.setLiftSpeed(this.climberSpeed);
+      isFinished = false;
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
