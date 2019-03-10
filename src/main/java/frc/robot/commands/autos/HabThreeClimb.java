@@ -33,7 +33,7 @@ public class HabThreeClimb extends CommandGroup {
     addSequential(new DropArms());
     addSequential(new LiftRobotAuto(0));
     addSequential(new DriveClimberWheels());
-    addSequential(new );
+   // addSequential(new );
     //Lift Robot auto combines elevator and climber wheels
 
     
