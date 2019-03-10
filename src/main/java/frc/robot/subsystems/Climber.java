@@ -50,8 +50,16 @@ public class Climber extends Subsystem {
   }
 
   //TODO add get limit switch status here
-  public boolean getLimitSwitch() {
+  public boolean getLimitSwitchTop() {
     return false;
+  }
+
+  public boolean getLimitSwitchBottom() {
+    return false;
+  }
+
+  public double getOutputCurrent() {
+    return lift.getOutputCurrent();
   }
 
   @Override
