@@ -10,13 +10,14 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+//TODO MAKE SURE CLIMBER AND ELEVATOR ARE GOING IN THE RIGHT DIRECTION!!!!!!!!!!!!
 public class LiftRobotAuto extends Command {
 
   //Speed should be 0.5
   private double climberSpeed = 0.0;
   private double elevatorSpeed = 0.0;
   private boolean isFinished = false;
-  private boolean isClimberExtendFinished = false;
+  private boolean isClimberFinished = false;
   private boolean isElevatorFinished = false;
 
 
@@ -32,7 +33,7 @@ public class LiftRobotAuto extends Command {
   protected void initialize() {
     
     this.isFinished = false;
-    this.isClimberExtendFinished = false;
+    this.isClimberFinished = false;
     this.isElevatorFinished = false;
   }
 
@@ -40,17 +41,19 @@ public class LiftRobotAuto extends Command {
   @Override
   protected void execute() {
     //------------------Climber------------------
-    if(Robot.climber.getLimitSwitch() == true) {
+    if(Robot.climber.getLimitSwitchBottom() && this.climberSpeed > 0) {
       //TODO needs a minimum lift speed to keep us up
       Robot.climber.setLiftSpeed(0); 
-      this.isClimberExtendFinished = true;
+      this.isClimberFinished = true;
+    } else if(Robot.climber.getLimitSwitchTop() && this.climberSpeed < 0) {
+      Robot.climber.setLiftSpeed(0);
+      this.isClimberFinished = true;
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);
-      this.isClimberExtendFinished = false;
     }
 
     //------------------Elevator------------------
-    if(Robot.elevator.isFwdLimitSwitchClosed() == true) {
+    if(Robot.elevator.isFwdLimitSwitchClosed()) {
       Robot.elevator.setSpeed(0.0);
       isElevatorFinished = true; 
     } else {
@@ -59,7 +62,7 @@ public class LiftRobotAuto extends Command {
     }
 
     //------------------Check------------------
-    if(isClimberExtendFinished && isElevatorFinished) {
+    if(isClimberFinished && isElevatorFinished) {
       isFinished = true;
     } else {
       isFinished = false;
