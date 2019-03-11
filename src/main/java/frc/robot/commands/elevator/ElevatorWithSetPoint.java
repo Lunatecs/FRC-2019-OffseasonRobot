@@ -23,6 +23,13 @@ public class ElevatorWithSetPoint extends Command {
     this.setPoint = setPoint;
   }
 
+  public ElevatorWithSetPoint(int setPoint, boolean relative) {
+    this(setPoint);
+    if(relative) {
+      this.setPoint = Robot.elevator.getHeight() + setPoint;
+    } 
+  }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
