@@ -39,8 +39,8 @@ public class DriveWithJoysticks extends Command {
     
     } else {
     
-      //Robot.drive.arcadeDriveWithoutEncoders((Robot.oi.getSpeed()), Robot.oi.getRotation());
-      Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
+      Robot.drive.arcadeDriveWithoutEncoders((Robot.oi.getSpeed()), Robot.oi.getRotation());
+      //Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
     
     }
 
