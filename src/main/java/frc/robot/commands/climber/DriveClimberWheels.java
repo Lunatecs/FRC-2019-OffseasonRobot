@@ -12,18 +12,21 @@ import frc.robot.Robot;
 //import frc.robot.subsystems.Climber;
 
 public class DriveClimberWheels extends Command {
-  public DriveClimberWheels() {
+
+
+  private double climbwheelspeed = 0.0;
+  private double drivespeed = 0.0;
+  private boolean isFinished = false;
+  private static final double DISTANCE_TO_WALL = 20.0;
+
+  public DriveClimberWheels(double climbwheelspeed, double drivespeed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-
+    this.climbwheelspeed = climbwheelspeed;
+    this.drivespeed = drivespeed;
     requires(Robot.climber);
     requires(Robot.drive);
   }
-
-  private static final double CLIMBERWHEELSPEED = 0.5;
-  private static final double DRIVESPEED = 0.5;
-  private boolean isFinished = false;
-  private static final double DISTANCE_TO_WALL = 20.0;
 
   // Called just before this Command runs the first time
   @Override
@@ -36,8 +39,8 @@ public class DriveClimberWheels extends Command {
   @Override
   protected void execute() {
     if(Robot.ultrasonicSensors.getRange() > DISTANCE_TO_WALL){
-      Robot.climber.setDriveSpeed(CLIMBERWHEELSPEED);
-      Robot.drive.arcadeDrive(DRIVESPEED, 0);
+      Robot.climber.setDriveSpeed(this.climbwheelspeed);
+      Robot.drive.arcadeDrive(this.drivespeed, 0);
 
     } else {
       Robot.climber.setDriveSpeed(0);
