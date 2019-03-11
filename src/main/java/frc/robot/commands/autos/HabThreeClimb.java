@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.commands.climber.DriveClimberWheels;
 import frc.robot.commands.climber.LiftRobotAuto;
 import frc.robot.commands.climber.DropArms;
-//import frc.robot.commands.elevator.ElevatorWithJoystick;;
+import frc.robot.commands.climber.LiftClimber;
 
 public class HabThreeClimb extends CommandGroup {
   /**
@@ -33,8 +33,11 @@ public class HabThreeClimb extends CommandGroup {
     addSequential(new DropArms());
     addSequential(new LiftRobotAuto(0));
     addSequential(new DriveClimberWheels());
-   // addSequential(new );
+    addSequential(new LiftClimber(0));
+    addSequential(new AutoDrivetrain(0));
+
     //Lift Robot auto combines elevator and climber wheels
+    //TODO add a speed to the LRA LC
 
     
     // A command group will require all of the subsystems that each member
