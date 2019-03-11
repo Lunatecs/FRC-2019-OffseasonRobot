@@ -41,14 +41,14 @@ public class Elevator extends Subsystem {
   private static final double PERCENT_kP = 0.00010843;
 
   private static final int TOP_ELEVATOR_LIMIT = 27200;
-  private static final int BOTTOM_ELEVATOR_LIMIT = 2000;
+  private static final int BOTTOM_ELEVATOR_LIMIT = 1;
 
   public static final int TOP_ELEVATOR_SET_POINT = -26000;
-  public static final int BOTTOM_ELEVATOR_SET_POINT = -2000;
+  public static final int BOTTOM_ELEVATOR_SET_POINT = -1;
 
   public static final int ROCKET_UPPER_HATCH = -26260;
   public static final int ROCKET_MIDDLE_HATCH = -13500;
-  public static final int ROCKET_LOWER_HATCH = -2000;
+  public static final int ROCKET_LOWER_HATCH = -1;
 
 
   public static final double TOP_ELEVATOR_MIN_POWER = -0.15;
