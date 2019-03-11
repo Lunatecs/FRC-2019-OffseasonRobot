@@ -75,7 +75,7 @@ public class OI {
 
   public OI(){
     
-    driverRedButton.whileActive(new AutoDrivetrain(12));
+    driverRedButton.whileActive(new AutoDrivetrain(60));
     climbButtons.whileActive(new AutoClimb());
     
     //TODO Make sure grab and launch are going the right directions

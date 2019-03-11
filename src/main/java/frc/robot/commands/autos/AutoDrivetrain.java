@@ -17,7 +17,7 @@ public class AutoDrivetrain extends PIDCommand {
   private boolean isFinished = false;
 
   public AutoDrivetrain(double setPoint) {
-    super("AutoDrivetrain",.1,0.0,0.0);
+    super("AutoDrivetrain",.0125,0.0000625,0.0);
     this.getPIDController().setAbsoluteTolerance(1.0);
     requires(Robot.drive);
     this.setPoint = setPoint;
@@ -93,6 +93,6 @@ public class AutoDrivetrain extends PIDCommand {
       output = .75 * (output/Math.abs(output));
     } 
     SmartDashboard.putNumber("AutoDrivetrain PID", output); 
-    Robot.drive.arcadeDrive(output, rotation);
+    Robot.drive.arcadeDriveWithoutEncoders(output, rotation);
   }
 }
