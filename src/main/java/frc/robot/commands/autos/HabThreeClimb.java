@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.climber.DriveClimberWheels;
 import frc.robot.commands.climber.LiftRobotAuto;
+import frc.robot.commands.elevator.ElevatorWithSetPoint;
 import frc.robot.commands.climber.DropArms;
 import frc.robot.commands.climber.LiftClimber;
 
@@ -21,10 +22,11 @@ public class HabThreeClimb extends CommandGroup {
   public HabThreeClimb() {
 
     //addSequential(new DropArms());
-    addSequential(new LiftRobotAuto(0));
-    addSequential(new DriveClimberWheels(0.5,0.5));
-    addSequential(new LiftClimber(0));
-    addSequential(new AutoDrivetrain(0));
+    addSequential(new LiftRobotAuto(.25));
+    addSequential(new DriveClimberWheels(0.25,0.25, 20.0));
+    addSequential(new ElevatorWithSetPoint(-2000, true));
+    addSequential(new LiftClimber(.25));
+    addSequential(new AutoForwardDrive(6.0, .25));
 
     //Lift Robot auto combines elevator and climber wheels
     //TODO ADD VALUES TO GROUP

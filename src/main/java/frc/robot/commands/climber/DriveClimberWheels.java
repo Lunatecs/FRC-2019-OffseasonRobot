@@ -17,13 +17,14 @@ public class DriveClimberWheels extends Command {
   private double climbwheelspeed = 0.0;
   private double drivespeed = 0.0;
   private boolean isFinished = false;
-  private static final double DISTANCE_TO_WALL = 20.0;
+  private double distanceToWall = 0.0;
 
-  public DriveClimberWheels(double climbwheelspeed, double drivespeed) {
+  public DriveClimberWheels(double climbwheelspeed, double drivespeed, double distanceToWall) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.climbwheelspeed = climbwheelspeed;
     this.drivespeed = drivespeed;
+    this.distanceToWall = distanceToWall;
     requires(Robot.climber);
     requires(Robot.drive);
   }
@@ -38,7 +39,7 @@ public class DriveClimberWheels extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.ultrasonicSensors.getRange() > DISTANCE_TO_WALL){
+    if(Robot.ultrasonicSensors.getRange() > this.distanceToWall){
       Robot.climber.setDriveSpeed(this.climbwheelspeed);
       Robot.drive.arcadeDrive(this.drivespeed, 0);
 
