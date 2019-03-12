@@ -34,8 +34,7 @@ public class MoveClimberManual extends Command {
 
     //If toplimit and trying to go up(positive), stop from going up
     if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
-      Robot.climber.setLiftSpeed(0); 
-      Robot.climber.resetEncoder();
+      Robot.climber.stopClimberLift();
     } else {
       Robot.climber.setLiftSpeed(Robot.oi.getClimbSpeed());
     }

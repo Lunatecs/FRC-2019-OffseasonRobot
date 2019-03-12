@@ -70,6 +70,12 @@ public class Climber extends Subsystem {
     this.lift.setSelectedSensorPosition(0, 0, 10);
   }
 
+  public void stopClimberLift() {
+    this.setLiftSpeed(0);
+    this.resetEncoder();
+  }
+
+
   public boolean isPastRequiredDistance() {
     if(Math.abs(getEncoderValue())>Climber.REQUIRED_DISTANCE) {
       return true;

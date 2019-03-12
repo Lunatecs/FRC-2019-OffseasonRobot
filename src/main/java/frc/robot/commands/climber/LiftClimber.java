@@ -32,7 +32,7 @@ public class LiftClimber extends Command {
   protected void execute() {
     //------------------Climber------------------
     if (Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
-      Robot.climber.setLiftSpeed(0);
+      Robot.climber.stopClimberLift();
       isFinished = true;
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);

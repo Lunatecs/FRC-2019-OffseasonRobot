@@ -47,8 +47,7 @@ public class LiftRobotManual extends Command {
     if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
 
       //TODO needs a minimum lift speed to keep us up(fighting springs)
-      Robot.climber.setLiftSpeed(0); 
-    //If bottomlimit of trying to go down(negative), stop from going down
+      Robot.climber.stopClimberLift();
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);
     }
