@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -28,7 +29,11 @@ public class Climber extends Subsystem {
   VictorSPX drive = new VictorSPX(RobotMap.CLIMBER_DRIVE_CONTROLLER_V_ID);
   //TODO: set can id for forward and reverse
   DoubleSolenoid arms = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
+  //TODO: set DIO port
+  DigitalInput limitSwitch = new DigitalInput(0);
+  
 
+  public static final int REQUIRED_DISTANCE = 8000;
 
 
   public void setLiftSpeed(double newSpeed){
@@ -49,17 +54,28 @@ public class Climber extends Subsystem {
     arms.set(DoubleSolenoid.Value.kReverse);
   }
 
-  //TODO add get limit switch status here
-  public boolean getLimitSwitchTop() {
-    return false;
+  public boolean getLimitSwitch() {
+    return this.limitSwitch.get();
   }
 
-  public boolean getLimitSwitchBottom() {
-    return false;
+  public int getEncoderValue() {
+    return this.lift.getSelectedSensorPosition(0);
   }
 
   public double getOutputCurrent() {
     return lift.getOutputCurrent();
+  }
+
+  public void resetEncoder() {
+    this.lift.setSelectedSensorPosition(0, 0, 10);
+  }
+
+  public boolean isPastRequiredDistance() {
+    if(Math.abs(getEncoderValue())>Climber.REQUIRED_DISTANCE) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override

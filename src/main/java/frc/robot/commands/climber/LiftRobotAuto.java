@@ -9,6 +9,7 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Climber;
 
 //TODO MAKE SURE CLIMBER AND ELEVATOR ARE GOING IN THE RIGHT DIRECTION!!!!!!!!!!!!
 public class LiftRobotAuto extends Command {
@@ -41,12 +42,9 @@ public class LiftRobotAuto extends Command {
   @Override
   protected void execute() {
     //------------------Climber------------------
-    if(Robot.climber.getLimitSwitchBottom() && this.climberSpeed > 0) {
-      //TODO needs a minimum lift speed to keep us up
+    if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
       Robot.climber.setLiftSpeed(0); 
-      this.isClimberFinished = true;
-    } else if(Robot.climber.getLimitSwitchTop() && this.climberSpeed < 0) {
-      Robot.climber.setLiftSpeed(0);
+      Robot.climber.resetEncoder();
       this.isClimberFinished = true;
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);
@@ -85,4 +83,7 @@ public class LiftRobotAuto extends Command {
   @Override
   protected void interrupted() {
   }
+
+
+
 }

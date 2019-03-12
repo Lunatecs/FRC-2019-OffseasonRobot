@@ -44,14 +44,11 @@ public class LiftRobotManual extends Command {
     //TODO check if negative is down and positive is up on climber or swap
 
     //If toplimit and trying to go up(positive), stop from going up
-    if(Robot.climber.getLimitSwitchTop() && this.climberSpeed > 0) {
+    if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
 
       //TODO needs a minimum lift speed to keep us up(fighting springs)
       Robot.climber.setLiftSpeed(0); 
     //If bottomlimit of trying to go down(negative), stop from going down
-    } else if(Robot.climber.getLimitSwitchBottom() && this.climberSpeed < 0) {
-      Robot.climber.setLiftSpeed(0); 
-    //Otherwise set speed to passed in speed
     } else {
       Robot.climber.setLiftSpeed(this.climberSpeed);
     }
