@@ -27,12 +27,15 @@ public class CargoIntake extends Subsystem {
   public TalonSRX cargoWheel = new TalonSRX(RobotMap.INTAKE_CARGO_CONTROLLER_T_ID);
   public NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
 
+  private boolean isLowerd = false;
+
   //constructor
   public CargoIntake(){
 
     cargoWheel.configFactoryDefault();
     cargoWheel.setNeutralMode(WHEELS_BRAKE_MODE);
     cargoWheel.configVoltageCompSaturation(12);
+    this.isLowerd = false;
   }
 
   @Override
@@ -43,13 +46,20 @@ public class CargoIntake extends Subsystem {
   //TODO correct forward and reverse of solenoids to the right actions
   public void raiseCargoIntake(){
     cargoWristSolenoid.set(DoubleSolenoid.Value.kForward);
+    this.isLowerd = false;
   }
 
   public void lowerCargoIntake(){
     cargoWristSolenoid.set(DoubleSolenoid.Value.kReverse);
+    this.isLowerd = true;
   }
 
   public void setCargoWheelSpeed(double speed){
     cargoWheel.set(ControlMode.PercentOutput, speed);
   }  
+
+  public boolean isLowerd() {
+    return this.isLowerd;
+  }
+  
 }
