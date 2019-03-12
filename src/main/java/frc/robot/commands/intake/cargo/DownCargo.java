@@ -19,7 +19,9 @@ public class DownCargo extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoIntake.lowerCargoIntake();
+    if (!Robot.hatchIntake.isExtended()) {
+      Robot.cargoIntake.lowerCargoIntake();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

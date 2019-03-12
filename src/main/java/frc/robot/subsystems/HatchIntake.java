@@ -24,12 +24,14 @@ public class HatchIntake extends Subsystem {
   //TODO fix CAN value
   private TalonSRX hatchWheel = new TalonSRX(RobotMap.INTAKE_HATCH_CONTROLLER_T_ID);
   private NeutralMode WHEELS_BRAKE_MODE = NeutralMode.Brake;
+  private boolean isExtended = false;
 
   //constructor
   public HatchIntake() {
     hatchWheel.configFactoryDefault();
     hatchWheel.setNeutralMode(WHEELS_BRAKE_MODE);
     hatchWheel.configVoltageCompSaturation(12);
+    this.isExtended = false;
   }
 
   @Override
@@ -40,13 +42,19 @@ public class HatchIntake extends Subsystem {
 
   public void extendHatchIntake(){
     hatchSliderSolenoid.set(DoubleSolenoid.Value.kForward);
+    this.isExtended = true;
   }
 
   public void retractHatchIntake(){
     hatchSliderSolenoid.set(DoubleSolenoid.Value.kReverse);
+    this.isExtended = false;
   }
 
   public void setHatchWheelSpeed(double speed){
     hatchWheel.set(ControlMode.PercentOutput, speed);
+  }
+
+  public boolean isExtended() {
+    return this.isExtended;
   }
 }
