@@ -17,6 +17,7 @@ import frc.robot.button.LoneJoystickButton;
 import frc.robot.button.LonePOVButton;
 import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
+import frc.robot.commands.climber.DriveClimberWheels;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
 import frc.robot.commands.intake.cargo.DownCargo;
 import frc.robot.commands.intake.cargo.UpCargo;
@@ -67,6 +68,9 @@ public class OI {
   LoneJoystickButton loneGreenButton = new LoneJoystickButton(greenButton, leftBumperButton, rightBumperButton);
   LoneJoystickButton loneBlueButton = new LoneJoystickButton(blueButton, leftBumperButton, rightBumperButton);
 
+  POVButton driverUpPOV = new POVButton(this.driverJoystick, 0);
+  POVButton driverDownPOV = new POVButton(this.driverJoystick, 180);
+
   POVButton upPOV = new POVButton(this.operatorJoystick, 0);
   POVButton rightPOV = new POVButton(this.operatorJoystick, 90);
   POVButton downPOV = new POVButton(this.operatorJoystick, 180);
@@ -89,6 +93,9 @@ public class OI {
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
+
+    driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
+    driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
 
   }
 

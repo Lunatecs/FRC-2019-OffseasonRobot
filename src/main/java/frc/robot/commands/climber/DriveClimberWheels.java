@@ -63,6 +63,7 @@ public class DriveClimberWheels extends Command {
   @Override
   protected void end() {
     Robot.climber.setDriveSpeed(0);
+    Robot.drive.arcadeDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
@@ -70,4 +71,13 @@ public class DriveClimberWheels extends Command {
   @Override
   protected void interrupted() {
   }
+
+  //TODO Make sure this works!!!!!!!!!
+  @Override
+  public void cancel() {
+    super.cancel();
+    Robot.climber.setDriveSpeed(0);
+    Robot.drive.arcadeDrive(0, 0);
+  }
+
 }
