@@ -20,7 +20,7 @@ public class ExtendHatch extends Command {
   @Override
   protected void initialize() {
     if (!Robot.cargoIntake.isLowerd()) {
-    Robot.hatchIntake.extendHatchIntake();
+      Robot.hatchIntake.extendHatchIntake();
     }
   }
 
