@@ -88,8 +88,11 @@ public class Elevator extends Subsystem {
     follower.follow(leader);
 
   }
-
   public void setSpeed(double speed) {
+    this.setSpeed(speed, BOTTOM_ELEVATOR_MIN_POWER);
+  }
+
+  public void setSpeed(double speed, double minDownSpeed) {
 
     if(Math.abs(speed)> DEADZONE){
       
@@ -120,8 +123,8 @@ public class Elevator extends Subsystem {
           speed2 = speed;
         }
 
-        if(speed2 < BOTTOM_ELEVATOR_MIN_POWER) {
-          speed2 = BOTTOM_ELEVATOR_MIN_POWER;
+        if(speed2 < minDownSpeed) {
+          speed2 = minDownSpeed;
         }
 
         SmartDashboard.putNumber("DOWN", speed2);
