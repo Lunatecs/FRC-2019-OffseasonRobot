@@ -88,6 +88,8 @@ public class OI {
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
 
+    this.rightYellowButton.whenActive(new DropArms());
+.
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
 
