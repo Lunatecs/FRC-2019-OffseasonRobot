@@ -9,6 +9,7 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 //Controls both elevator and lift during lift period
 public class LiftRobotManual extends Command {
 
@@ -52,8 +53,10 @@ public class LiftRobotManual extends Command {
       Robot.climber.setLiftSpeed(this.climberSpeed);
     }
 
+    if(!Robot.oi.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
     //------------------Elevator------------------
       Robot.elevator.setSpeed(this.elevatorSpeed);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
