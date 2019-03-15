@@ -55,7 +55,7 @@ public class LiftRobotManual extends Command {
 
     if(!Robot.oi.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
     //------------------Elevator------------------
-      Robot.elevator.setSpeed(this.elevatorSpeed);
+      Robot.elevator.setSpeed(this.elevatorSpeed, .3);
     }
   }
 
