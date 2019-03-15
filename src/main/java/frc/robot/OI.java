@@ -88,9 +88,6 @@ public class OI {
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
 
-    leftRedButton.whileActive(new SetLEDColor(LED.SOLID_RED));
-    leftGreenButton.whileActive(new SetLEDColor(LED.SOLID_GREEN));
-
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
 
