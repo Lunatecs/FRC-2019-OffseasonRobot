@@ -75,8 +75,10 @@ public class RobotMap {
   public static int LEFT_JOY_BUTTON_ID = 9;
   public static int RIGHT_JOY_BUTTON_ID = 10;
 
+  //DIO
   public static int ULTRASONIC_PING_ID = 0;
   public static int ULTRASONIC_ECHO_ID = 1;
+  public static int CLIMBER_LIMIT_ID = 4;
 
   public static int POTENTIOMETER_ID = 3;
   public static int POTENTIOMETER_RANGE = 1080;

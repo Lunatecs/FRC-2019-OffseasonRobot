@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.climber.DefaultClimberCommand;
+import frc.robot.commands.climber.LiftRobotManual;
 
 
 
@@ -30,7 +31,7 @@ public class Climber extends Subsystem {
   //TODO: set can id for forward and reverse
   DoubleSolenoid arms = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
   //TODO: set DIO port
-  DigitalInput limitSwitch = new DigitalInput(0);
+  DigitalInput limitSwitch = new DigitalInput(RobotMap.CLIMBER_LIMIT_ID);
   
 
   public static final int REQUIRED_DISTANCE = 8000;
@@ -88,6 +89,6 @@ public class Climber extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new DefaultClimberCommand());
+    //setDefaultCommand(new LiftRobotManual());
   }
 }
