@@ -18,6 +18,7 @@ import frc.robot.button.LonePOVButton;
 import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
 import frc.robot.commands.climber.DriveClimberWheels;
+import frc.robot.commands.climber.DropArms;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
 import frc.robot.commands.intake.cargo.DownCargo;
 import frc.robot.commands.intake.cargo.UpCargo;
@@ -89,7 +90,7 @@ public class OI {
     loneBlueButton.whenActive(new RetractHatch());
 
     this.rightYellowButton.whenActive(new DropArms());
-.
+
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
 
