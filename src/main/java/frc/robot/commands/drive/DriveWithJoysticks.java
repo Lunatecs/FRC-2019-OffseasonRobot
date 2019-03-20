@@ -32,20 +32,20 @@ public class DriveWithJoysticks extends Command {
     if(Robot.oi.driverJoystick.getRawAxis(RobotMap.LEFT_TRIGGER_ID) > .2) {
 
 //      Robot.drive.arcadeDrive(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-    } else  if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)){
+      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.6);
+    } else  if(Robot.oi.driverJoystick.getRawAxis(RobotMap.RIGHT_TRIGGER_ID) > .2){
     
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation());
+      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.85, Robot.oi.getRotation()*.85);
     
     } else {
     
-      Robot.drive.arcadeDriveWithoutEncoders((Robot.oi.getSpeed()), Robot.oi.getRotation());
+      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation());
       //Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
     
     }
 
-    SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
-    SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
+    //SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
+    //SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
   }
 
   // Make this return true when this Command no longer needs to run execute()
