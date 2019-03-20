@@ -19,9 +19,9 @@ public class ExtendHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (!Robot.cargoIntake.isLowerd()) {
+    //if (!Robot.cargoIntake.isLowerd()) {
       Robot.hatchIntake.extendHatchIntake();
-    }
+   // }
   }
 
   // Called repeatedly when this Command is scheduled to run
