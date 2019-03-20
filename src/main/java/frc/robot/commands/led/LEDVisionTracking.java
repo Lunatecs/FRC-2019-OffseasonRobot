@@ -38,9 +38,9 @@ public class LEDVisionTracking extends Command {
     
     //If in range of ultrasonic sensor and there is a valid target
     if(actualDistance <= LEDTriggerLimit && Robot.limelight.isValidTarget() && !(actualDistance < 0)){
-      Robot.led.setColor(LED.SOLID_GREEN);
+      //Robot.led.setColor(LED.SOLID_GREEN);
     } else {
-      Robot.led.setColor(LED.SOLID_RED);
+     // Robot.led.setColor(LED.SOLID_RED);
     }
   }
 

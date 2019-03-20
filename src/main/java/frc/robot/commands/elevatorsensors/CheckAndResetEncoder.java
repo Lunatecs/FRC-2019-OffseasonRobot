@@ -10,6 +10,7 @@ package frc.robot.commands.elevatorsensors;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.ElevatorSensors;
+import frc.robot.subsystems.LED;
 
 public class CheckAndResetEncoder extends Command {
   public CheckAndResetEncoder() {
@@ -26,6 +27,11 @@ public class CheckAndResetEncoder extends Command {
   @Override
   protected void execute() {
     Robot.elevatorSensors.checkAndResetEncoder();
+    if(Robot.elevator.isFwdLimitSwitchClosed() || Robot.elevator.getHeight() > -100) {
+      Robot.led.removeColor(LED.SOLID_BLUE, 2);
+    } else {
+      Robot.led.setColor(LED.SOLID_BLUE,2);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
