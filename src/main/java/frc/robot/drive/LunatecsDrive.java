@@ -25,7 +25,8 @@ public class LunatecsDrive {
     }
 
     public void arcadeDrive(double speed, double rotation, boolean rampUp) {
-        if(Math.abs(speed) >= DEADZONE || Math.abs(rotation) >= DEADZONE){
+        drive.arcadeDrive(speed, rotation);
+      /*  if(Math.abs(speed) >= DEADZONE || Math.abs(rotation) >= DEADZONE){
             double speed2 = speed;
             if(rampUp && Math.abs(speed) > DEADZONE){
                 speed2 = rampUp(speed);
@@ -49,7 +50,7 @@ public class LunatecsDrive {
             resetLoopCount();
             reset = true;
         }
-        
+        */
     }
 
     private void calibrateEncodersToZero(){
