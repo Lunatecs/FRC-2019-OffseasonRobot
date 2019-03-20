@@ -7,7 +7,9 @@
 
 package frc.robot.commands.intake.hatch;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class GrabAndLaunchHatchAuto extends Command {
@@ -25,6 +27,7 @@ public class GrabAndLaunchHatchAuto extends Command {
   @Override
   protected void initialize() {
     Robot.hatchIntake.setHatchWheelSpeed(this.speed);
+    SmartDashboard.putBoolean("AUTO FINISHED", false);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +40,7 @@ public class GrabAndLaunchHatchAuto extends Command {
   protected boolean isFinished() {
     if(this.isTimedOut()){
       Robot.hatchIntake.setHatchWheelSpeed(0);
+      SmartDashboard.putBoolean("AUTO FINISHED", true);
       return true;
     }
     return false;

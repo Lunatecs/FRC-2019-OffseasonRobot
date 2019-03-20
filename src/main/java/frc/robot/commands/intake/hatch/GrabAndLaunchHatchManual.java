@@ -8,7 +8,9 @@
 package frc.robot.commands.intake.hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.LED;
 
 public class GrabAndLaunchHatchManual extends Command {
   
@@ -29,6 +31,18 @@ public class GrabAndLaunchHatchManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Robot.hatchIntake.tripLimit() && this.speed>0) {
+      //Dont know what will happen if false, not using cancel in subsystem
+      Robot.led.setColor(LED.SOLID_GREEN,1);
+      SmartDashboard.putBoolean("GOT IT", true);
+
+    } else if(this.speed<0) {
+      Robot.led.removeColor(LED.SOLID_GREEN,1);
+      //Robot.led.setColor(LED.SOLID_RED);
+      SmartDashboard.putBoolean("GOT IT", false);
+    }
+
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
