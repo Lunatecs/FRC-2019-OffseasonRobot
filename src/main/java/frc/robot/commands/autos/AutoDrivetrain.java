@@ -17,7 +17,7 @@ public class AutoDrivetrain extends PIDCommand {
   private boolean isFinished = false;
 
   public AutoDrivetrain(double setPoint) {
-    super("AutoDrivetrain",.0125,0.0000625,0.0);
+    super("AutoDrivetrain",.0125,0.0,0.0);
     this.getPIDController().setAbsoluteTolerance(1.0);
     requires(Robot.drive);
     this.setPoint = setPoint;
