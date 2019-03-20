@@ -10,8 +10,12 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ElevatorWithJoystick extends Command {
+
+  static final double MIN_CLIMB_SPEED = .25;
+
   public ElevatorWithJoystick() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -27,7 +31,11 @@ public class ElevatorWithJoystick extends Command {
   @Override
   protected void execute() {
 
-    Robot.elevator.setSpeed(Robot.oi.getElevatorSpeed());
+    if(Robot.oi.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
+      Robot.elevator.setSpeed(Robot.oi.getElevatorSpeed(), MIN_CLIMB_SPEED);
+    } else {
+      Robot.elevator.setSpeed(Robot.oi.getElevatorSpeed());
+    }
     SmartDashboard.putData(Robot.elevator);
     SmartDashboard.putNumber("Encoder", Robot.elevator.getHeight());
 
