@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autos.AutoDoNothing;
+import frc.robot.commands.autos.AutoHatchStart;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -45,7 +47,7 @@ public class Robot extends TimedRobot {
   public static Climber climber;
 
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -65,7 +67,9 @@ public class Robot extends TimedRobot {
     oi = new OI();
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    chooser.addOption("None",new AutoDoNothing());
+    chooser.addOption("Grab Hatch", new AutoHatchStart());
+    SmartDashboard.putData("Auto mode", chooser);
   }
 
   /**
@@ -87,6 +91,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    SmartDashboard.putBoolean("AUTO FINISHED", false);
   }
 
   @Override
@@ -107,7 +112,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
+    if(m_autonomousCommand != null && this.m_autonomousCommand instanceof AutoHatchStart) {
+      m_autonomousCommand.start();
+    }
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -115,11 +123,6 @@ public class Robot extends TimedRobot {
      * = new MyAutoCommand(); break; case "Default Auto": default:
      * autonomousCommand = new ExampleCommand(); break; }
      */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
   }
 
   /**
