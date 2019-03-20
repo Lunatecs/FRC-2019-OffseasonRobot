@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.intake.hatch.DefaultHatch;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -31,22 +32,26 @@ public class HatchIntake extends Subsystem {
     hatchWheel.configFactoryDefault();
     hatchWheel.setNeutralMode(WHEELS_BRAKE_MODE);
     hatchWheel.configVoltageCompSaturation(12);
+    hatchWheel.configPeakCurrentLimit(20, 10);
+    hatchWheel.configPeakCurrentDuration(500, 10);
+    hatchWheel.configContinuousCurrentLimit(0, 10);
+    hatchWheel.enableCurrentLimit(true);
     this.isExtended = false;
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new DefaultHatch());
   }
 
   public void extendHatchIntake(){
-    hatchSliderSolenoid.set(DoubleSolenoid.Value.kForward);
+    hatchSliderSolenoid.set(DoubleSolenoid.Value.kReverse);
     this.isExtended = true;
   }
 
   public void retractHatchIntake(){
-    hatchSliderSolenoid.set(DoubleSolenoid.Value.kReverse);
+    hatchSliderSolenoid.set(DoubleSolenoid.Value.kForward);
     this.isExtended = false;
   }
 
@@ -54,7 +59,10 @@ public class HatchIntake extends Subsystem {
     hatchWheel.set(ControlMode.PercentOutput, speed);
   }
 
-  public boolean isExtended() {
-    return this.isExtended;
-  }
+  public boolean tripLimit() {
+    if(hatchWheel.getOutputCurrent() > 40) {
+      return true;         
+    }
+    return false;
+  }                                                                                                                              
 }
