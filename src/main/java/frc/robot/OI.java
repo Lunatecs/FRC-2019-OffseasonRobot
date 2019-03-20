@@ -19,6 +19,7 @@ import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
 import frc.robot.commands.climber.DriveClimberWheels;
 import frc.robot.commands.climber.DropArms;
+import frc.robot.commands.climber.RaiseArms;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
 import frc.robot.commands.intake.cargo.DownCargo;
 import frc.robot.commands.intake.cargo.UpCargo;
@@ -81,21 +82,22 @@ public class OI {
   public OI(){
     
     driverRedButton.whileActive(new AutoDrivetrain(60));
-    climbButtons.whileActive(new AutoClimb());
+    //climbButtons.whileActive(new AutoClimb());
     
     //TODO Make sure grab and launch are going the right directions
-    loneYellowButton.whileActive(new GrabAndLaunchHatchManual(0.5));
-    loneGreenButton.whileActive(new GrabAndLaunchHatchManual(-0.5));
+    loneYellowButton.whileActive(new GrabAndLaunchHatchManual(-1.0));
+    loneGreenButton.whileActive(new GrabAndLaunchHatchManual(1.0));
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
 
     this.rightYellowButton.whenActive(new DropArms());
+    this.leftSelect.whenActive(new RaiseArms());
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
 
-    driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
-    driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
+   // driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
+   // driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
 
   }
 
