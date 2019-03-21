@@ -21,10 +21,30 @@ import java.util.PriorityQueue;
 public class LED extends Subsystem {
   private Spark ledControl = new Spark(RobotMap.LED_PWM_ID);
   
-  public static final double SOLID_GREEN = 0.77;
-  public static final double SOLID_RED = 0.61;  
-  public static final double SOLID_BLUE = 0.87;
-  public static final double DEFAULT_COLOR = -0.97;//0.55;
+  private static final double SOLID_GREEN = 0.77;
+  private static final double SOLID_RED = 0.61;  
+  private static final double SOLID_BLUE = 0.87;
+  private static final double DEFAULT_COLOR = -0.97;//0.55;
+  private static final double REDORANGE_SOLID = 0.63;
+  private static final double SOLID_SKYBLUE = 0.83;
+  private static final double FIRE_MEDIUM = -0.59;
+  private static final double SOLID_WHITE = 0.93;
+  private static final double HEARTBEAT_WHITE = -0.21;
+  private static final double RAINBOW_GLITTER = -0.89;
+
+
+
+  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(SOLID_SKYBLUE, 2);
+  public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(FIRE_MEDIUM, 2);
+
+  public final PriorityColor SUCTION_ACHIEVED = new PriorityColor(SOLID_WHITE, 3);
+  public final PriorityColor CLIMBING_INPROGRESS = new PriorityColor(HEARTBEAT_WHITE, 4);
+  public final PriorityColor CLIMBING_COMPLETE = new PriorityColor(RAINBOW_GLITTER, 5);
+
+  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(REDORANGE_SOLID, 1);
+
+  
+
 
   private PriorityQueue<PriorityColor> queue = null;
 
@@ -38,9 +58,8 @@ public class LED extends Subsystem {
     
   }
 
-  public void setColor(double colorValue, int priority) {
-    PriorityColor p = new PriorityColor(colorValue, priority);
-    queue.add(p);
+  public void setColor(PriorityColor color) {
+    queue.add(color);
     ledControl.set(queue.peek().color);
   }
 
@@ -48,12 +67,12 @@ public class LED extends Subsystem {
     return ledControl.get();
   }
 
-  public void removeColor(double color, int priority) {
-    queue.remove(new PriorityColor(color, priority));
+  public void removeColor(PriorityColor color) {
+    queue.remove(color);
     ledControl.set(queue.peek().color);
   }
 
-  public void activateDefaultColors() {
+  private void activateDefaultColors() {
     ledControl.set(LED.DEFAULT_COLOR);
   }
 
@@ -73,14 +92,12 @@ public class LED extends Subsystem {
       this.priority = priority;
     }
 
-
     public int compare(PriorityColor p1 , PriorityColor p2) {
-        if(p1.color>p2.color) {
-            return 1;
-        } else if((p1.color<p2.color)) {
-            return -1;
-        } 
-        return 0;
+        if(p1.priority>= p2.priority) {
+          return -1;
+        } else {
+          return 1;
+        }
     }
 
   }
