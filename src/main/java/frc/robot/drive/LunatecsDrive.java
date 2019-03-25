@@ -2,6 +2,7 @@ package frc.robot.drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LunatecsDrive {
 
@@ -11,7 +12,7 @@ public class LunatecsDrive {
     private static final double DEADZONE = 0.2;
     private boolean reset = true;
     private double loopCount = 0.0;
-    private static final double RAMPSPEEDUP = 0.003;
+    private static final double RAMPSPEEDUP = 0.03;
 
     public LunatecsDrive(WPI_TalonSRX leftDrive, WPI_TalonSRX rightDrive) {
         this.left = leftDrive;
@@ -20,11 +21,26 @@ public class LunatecsDrive {
         //Here lies the souls of the robotics students
     }
 
-    public void arcadeDriveWithoutEncoders (double speed, double rotation) {
+    public void arcadeDriveWithoutEncoders (double speed, double rotation, boolean rampUp) {
+      /*  if(Math.abs(speed) <= DEADZONE && Math.abs(rotation) <= DEADZONE) {
+            this.resetLoopCount();
+        }
+        if(rampUp) {
+            speed = rampUp(speed);
+        }*/
+        SmartDashboard.putNumber("Speed", speed);
         drive.arcadeDrive(speed, rotation);
+
+    }
+
+    public void tankDrive(double leftSpeed, double rightSpeed) {
+        drive.tankDrive(leftSpeed, rightSpeed);
     }
 
     public void arcadeDrive(double speed, double rotation, boolean rampUp) {
+        if(rampUp) {
+            speed = rampUp(speed);
+        }
         drive.arcadeDrive(speed, rotation);
       /*  if(Math.abs(speed) >= DEADZONE || Math.abs(rotation) >= DEADZONE){
             double speed2 = speed;
