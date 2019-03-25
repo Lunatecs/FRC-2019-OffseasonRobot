@@ -24,7 +24,7 @@ public class LED extends Subsystem {
   private static final double SOLID_GREEN = 0.77;
   private static final double SOLID_RED = 0.61;  
   private static final double SOLID_BLUE = 0.87;
-  private static final double DEFAULT_COLOR = -0.97;//0.55;
+  private static final double DEFAULT_COLOR = 0.57;//-0.97;//0.55;
   private static final double REDORANGE_SOLID = 0.63;
   private static final double SOLID_SKYBLUE = 0.83;
   private static final double FIRE_MEDIUM = -0.59;
@@ -41,8 +41,8 @@ public class LED extends Subsystem {
   public final PriorityColor CLIMBING_INPROGRESS = new PriorityColor(HEARTBEAT_WHITE, 4);
   public final PriorityColor CLIMBING_COMPLETE = new PriorityColor(RAINBOW_GLITTER, 5);
 
-  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(REDORANGE_SOLID, 1);
-
+  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(SOLID_GREEN, 1);
+  public final PriorityColor HATCH_INTAKING_COLOR = new PriorityColor(FIRE_MEDIUM, 1);
   
 
 
@@ -59,7 +59,8 @@ public class LED extends Subsystem {
   }
 
   public void setColor(PriorityColor color) {
-    queue.add(color);
+    if(!queue.contains(color))
+      queue.add(color);
     ledControl.set(queue.peek().color);
   }
 
@@ -68,7 +69,8 @@ public class LED extends Subsystem {
   }
 
   public void removeColor(PriorityColor color) {
-    queue.remove(color);
+    while(queue.contains(color))
+      queue.remove(color);
     ledControl.set(queue.peek().color);
   }
 
@@ -82,7 +84,7 @@ public class LED extends Subsystem {
    // setDefaultCommand(new LEDVisionTracking());
   }
 
-  class PriorityColor implements Comparator<PriorityColor> {
+  class PriorityColor implements Comparator<PriorityColor>, Comparable<PriorityColor> {
 
     public double color;
     public int priority;
@@ -100,6 +102,9 @@ public class LED extends Subsystem {
         }
     }
 
+    public int compareTo(PriorityColor p2) {
+      return compare(this, p2);
+    }
   }
 
 }
