@@ -32,14 +32,22 @@ public class DriveWithJoysticks extends Command {
     if(Robot.oi.driverJoystick.getRawAxis(RobotMap.LEFT_TRIGGER_ID) > .2) {
 
 //      Robot.drive.arcadeDrive(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.6);
+      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.6, false);
+      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed()*.5, Robot.oi.getRightspeed()*.6);
     } else  if(Robot.oi.driverJoystick.getRawAxis(RobotMap.RIGHT_TRIGGER_ID) > .2){
-    
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.85, Robot.oi.getRotation()*.85);
-    
+      
+      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.85, Robot.oi.getRotation()*.85, false);
+      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed()*.85, Robot.oi.getRightspeed()*.85);
     } else {
-    
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation());
+      if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
+        //Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation(), false);
+         Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());
+     
+      } else {
+
+        Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation(), true);
+      }
+      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed(), Robot.oi.getRightspeed());
       //Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
     
     }

@@ -112,7 +112,15 @@ public class OI {
     return driverJoystick.getRawAxis(RobotMap.RIGHT_JOY_X_ID);
   
   }
+
+  public double getLeftSpeed() {
+    return driverJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
+  }
   
+  public double getRightspeed() {
+    return driverJoystick.getRawAxis(RobotMap.RIGHT_JOY_Y_ID);
+  }
+
   public double getElevatorSpeed(){
 
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
