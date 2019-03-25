@@ -40,7 +40,7 @@ public class GrabAndLaunchHatchManual extends Command {
       Robot.led.removeColor(Robot.led.HATCH_INTAKE_COLOR);
       //Robot.led.setColor(LED.SOLID_RED);
       SmartDashboard.putBoolean("GOT IT", false);
-    }
+    } 
 
     
   }
