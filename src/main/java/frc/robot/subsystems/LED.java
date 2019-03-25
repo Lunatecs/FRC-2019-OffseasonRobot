@@ -33,16 +33,17 @@ public class LED extends Subsystem {
   private static final double RAINBOW_GLITTER = -0.89;
 
 
+  public final PriorityColor SLOW_SPEED = new PriorityColor(HEARTBEAT_WHITE, 5);
 
-  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(SOLID_SKYBLUE, 2);
-  public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(FIRE_MEDIUM, 2);
+  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(SOLID_SKYBLUE, 20);
+  public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(FIRE_MEDIUM, 20);
 
-  public final PriorityColor SUCTION_ACHIEVED = new PriorityColor(SOLID_WHITE, 3);
-  public final PriorityColor CLIMBING_INPROGRESS = new PriorityColor(HEARTBEAT_WHITE, 4);
-  public final PriorityColor CLIMBING_COMPLETE = new PriorityColor(RAINBOW_GLITTER, 5);
+  public final PriorityColor SUCTION_ACHIEVED = new PriorityColor(SOLID_WHITE, 30);
+  public final PriorityColor CLIMBING_INPROGRESS = new PriorityColor(HEARTBEAT_WHITE, 40);
+  public final PriorityColor CLIMBING_COMPLETE = new PriorityColor(RAINBOW_GLITTER, 50);
 
-  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(SOLID_GREEN, 1);
-  public final PriorityColor HATCH_INTAKING_COLOR = new PriorityColor(FIRE_MEDIUM, 1);
+  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(SOLID_GREEN, 10);
+  public final PriorityColor HATCH_INTAKING_COLOR = new PriorityColor(FIRE_MEDIUM, 10);
   
 
 

@@ -29,31 +29,36 @@ public class DriveWithJoysticks extends Command {
   @Override
   protected void execute() {
     
+    double speed = Robot.oi.getSpeed();
+    double rotation = Robot.oi.getRotation();
+
+    Robot.led.removeColor(Robot.led.SLOW_SPEED);
+
     if(Robot.oi.driverJoystick.getRawAxis(RobotMap.LEFT_TRIGGER_ID) > .2) {
 
-//      Robot.drive.arcadeDrive(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.7);
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.5, Robot.oi.getRotation()*.6, false);
-      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed()*.5, Robot.oi.getRightspeed()*.6);
+      Robot.led.setColor(Robot.led.SLOW_SPEED);
+      speed = speed * .5;
+      rotation = rotation * .6;
+  
     } else  if(Robot.oi.driverJoystick.getRawAxis(RobotMap.RIGHT_TRIGGER_ID) > .2){
       
-      Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed()*.85, Robot.oi.getRotation()*.85, false);
-      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed()*.85, Robot.oi.getRightspeed()*.85);
-    } else {
-      if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
-        //Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation(), false);
-         Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());
-     
-      } else {
+      speed = speed * .85;
+      rotation = rotation * .85;
 
-        Robot.drive.arcadeDriveWithoutEncoders(Robot.oi.getSpeed(), Robot.oi.getRotation(), true);
+    } else {
+      
+      if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
+  
+        Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());     
+  
+      } else {
+  
+        Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
+  
       }
-      //Robot.drive.tankDrive(Robot.oi.getLeftSpeed(), Robot.oi.getRightspeed());
-      //Robot.drive.arcadeDrive((Robot.oi.getSpeed()), Robot.oi.getRotation());
-    
+
     }
 
-    //SmartDashboard.putNumber("LeftEncoder", Robot.drive.getLeftEncoder());
-    //SmartDashboard.putNumber("RightEncoder", Robot.drive.getRightEncoder());
   }
 
   // Make this return true when this Command no longer needs to run execute()
