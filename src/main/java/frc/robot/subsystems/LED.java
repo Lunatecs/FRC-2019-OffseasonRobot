@@ -35,7 +35,7 @@ public class LED extends Subsystem {
 
   public final PriorityColor SLOW_SPEED = new PriorityColor(HEARTBEAT_WHITE, 5);
 
-  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(SOLID_SKYBLUE, 20);
+  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(FIRE_MEDIUM, 20);
   public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(FIRE_MEDIUM, 20);
 
   public final PriorityColor SUCTION_ACHIEVED = new PriorityColor(SOLID_WHITE, 30);

@@ -27,7 +27,7 @@ public class CheckAndResetEncoder extends Command {
   @Override
   protected void execute() {
     Robot.elevatorSensors.checkAndResetEncoder();
-    if(Robot.elevator.isFwdLimitSwitchClosed() || Robot.elevator.getHeight() > -300) {
+    if(Robot.elevator.isFwdLimitSwitchClosed() || Robot.elevator.getHeight() > -3000) {
       Robot.led.removeColor(Robot.led.ELEVATOR_UP_COLOR);
     } else {
       Robot.led.setColor(Robot.led.ELEVATOR_UP_COLOR);

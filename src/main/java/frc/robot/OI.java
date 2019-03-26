@@ -81,7 +81,7 @@ public class OI {
 
   public OI(){
     
-    driverRedButton.whileActive(new AutoDrivetrain(60));
+    //driverRedButton.whileActive(new AutoDrivetrain(60));
     //climbButtons.whileActive(new AutoClimb());
     
     //TODO Make sure grab and launch are going the right directions
@@ -95,7 +95,7 @@ public class OI {
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
-
+    
    // driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
    // driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
 
