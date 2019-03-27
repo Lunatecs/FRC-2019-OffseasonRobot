@@ -81,7 +81,7 @@ public class OI {
 
   public OI(){
     
-    driverRedButton.whileActive(new AutoDrivetrain(60));
+    //driverRedButton.whileActive(new AutoDrivetrain(60));
     //climbButtons.whileActive(new AutoClimb());
     
     //TODO Make sure grab and launch are going the right directions
@@ -95,7 +95,7 @@ public class OI {
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
-
+    
    // driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
    // driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
 
@@ -112,7 +112,15 @@ public class OI {
     return driverJoystick.getRawAxis(RobotMap.RIGHT_JOY_X_ID);
   
   }
+
+  public double getLeftSpeed() {
+    return driverJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);
+  }
   
+  public double getRightspeed() {
+    return driverJoystick.getRawAxis(RobotMap.RIGHT_JOY_Y_ID);
+  }
+
   public double getElevatorSpeed(){
 
     return this.operatorJoystick.getRawAxis(RobotMap.LEFT_JOY_Y_ID);

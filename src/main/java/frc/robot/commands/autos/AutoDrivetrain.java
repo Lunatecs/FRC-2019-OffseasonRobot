@@ -93,6 +93,6 @@ public class AutoDrivetrain extends PIDCommand {
       output = .75 * (output/Math.abs(output));
     } 
     SmartDashboard.putNumber("AutoDrivetrain PID", output); 
-    Robot.drive.arcadeDriveWithoutEncoders(output, rotation);
+    Robot.drive.arcadeDriveWithoutEncoders(output, rotation, false);
   }
 }

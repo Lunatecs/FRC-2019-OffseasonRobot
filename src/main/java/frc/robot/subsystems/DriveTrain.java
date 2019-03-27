@@ -56,6 +56,9 @@ public class DriveTrain extends Subsystem {
 
     rightFront_V.follow(rightCenter_T);
     rightBack_V.follow(rightCenter_T);
+
+    this.rightCenter_T.configOpenloopRamp(.25, 10);
+    this.leftCenter_T.configOpenloopRamp(.25, 10);
     
     drive = new LunatecsDrive(leftCenter_T, rightCenter_T);
   }
@@ -66,8 +69,12 @@ public class DriveTrain extends Subsystem {
     drive.arcadeDrive(speed, rotation, false);
   }
 
-  public void arcadeDriveWithoutEncoders(double speed, double rotation) {
-    drive.arcadeDriveWithoutEncoders(speed, rotation);
+  public void arcadeDriveWithoutEncoders(double speed, double rotation, boolean rampUp) {
+    drive.arcadeDriveWithoutEncoders(speed, rotation, rampUp);
+  }
+
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    drive.tankDrive(leftSpeed, rightSpeed);
   }
 
   public double getLeftEncoder() {

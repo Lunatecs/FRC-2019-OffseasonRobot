@@ -60,7 +60,7 @@ public class HatchIntake extends Subsystem {
   }
 
   public boolean tripLimit() {
-    if(hatchWheel.getOutputCurrent() > 40) {
+    if(hatchWheel.getOutputCurrent() > 70) {
       return true;         
     }
     return false;
