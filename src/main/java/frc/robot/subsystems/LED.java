@@ -10,8 +10,10 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap; 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Spark;
+import frc.robot.commands.led.DefaultLEDCountDown;
 import frc.robot.commands.led.LEDVisionTracking;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 
@@ -33,16 +35,16 @@ public class LED extends Subsystem {
   private static final double RAINBOW_GLITTER = -0.89;
 
 
-  public final PriorityColor SLOW_SPEED = new PriorityColor(HEARTBEAT_WHITE, 5);
+  public final PriorityColor SLOW_SPEED = new PriorityColor(HEARTBEAT_WHITE, 20);
 
-  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(FIRE_MEDIUM, 20);
-  public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(FIRE_MEDIUM, 20);
+  public final PriorityColor ELEVATOR_UP_COLOR = new PriorityColor(SOLID_RED, 10);
+  public final PriorityColor ELEVATOR_DOWN_COLOR = new PriorityColor(SOLID_RED, 10);
 
   public final PriorityColor SUCTION_ACHIEVED = new PriorityColor(SOLID_WHITE, 30);
   public final PriorityColor CLIMBING_INPROGRESS = new PriorityColor(HEARTBEAT_WHITE, 40);
   public final PriorityColor CLIMBING_COMPLETE = new PriorityColor(RAINBOW_GLITTER, 50);
 
-  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(SOLID_GREEN, 10);
+  public final PriorityColor HATCH_INTAKE_COLOR = new PriorityColor(SOLID_GREEN, 30);
   public final PriorityColor HATCH_INTAKING_COLOR = new PriorityColor(FIRE_MEDIUM, 10);
   
 
@@ -79,16 +81,32 @@ public class LED extends Subsystem {
     ledControl.set(LED.DEFAULT_COLOR);
   }
 
+  public void countDownColorsInQueue() {
+    if(queue.size() > 1) {
+      Iterator<PriorityColor> it = queue.iterator();
+      while(it.hasNext()) {
+        PriorityColor color = it.next();
+        if(color.loopCount > -10) {
+          color.loopCount--;
+          if(color.loopCount<0) {
+            it.remove();
+          }
+        }
+      }
+    }
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-   // setDefaultCommand(new LEDVisionTracking());
+    //setDefaultCommand(new DefaultLEDCountDown());
   }
 
-  class PriorityColor implements Comparator<PriorityColor>, Comparable<PriorityColor> {
+  public class PriorityColor implements Comparator<PriorityColor>, Comparable<PriorityColor> {
 
     public double color;
     public int priority;
+    public int loopCount = -10;
 
     public PriorityColor(double color, int priority) {
       this.color = color;
