@@ -38,6 +38,10 @@ public class RobotMap {
   //left
   public static int CLIMBER_DRIVE_CONTROLLER_V_ID  = 13;
 
+  //suction climb
+  public static int SUCTION_TALON_ID = -1;
+  public static int WENCH_VICTOR_ID = -2;
+
   //solenoids
   public static int SLIDER_FORWARD_ID = 6;
   public static int SLIDER_BACKWARD_ID = 1;
