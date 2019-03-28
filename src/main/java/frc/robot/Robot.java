@@ -25,6 +25,8 @@ import frc.robot.subsystems.ElevatorSensors;
 import frc.robot.subsystems.HatchIntake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.UltrasonicSensors;
+import frc.robot.subsystems.Wench;
+import frc.robot.subsystems.Suction;
 import frc.robot.subsystems.LED;
 
 /**
@@ -45,6 +47,8 @@ public class Robot extends TimedRobot {
   public static ElevatorSensors elevatorSensors;
   public static UltrasonicSensors ultrasonicSensors;
   public static Climber climber;
+  public static Wench wench;
+  public static Suction suction;
 
   Command m_autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -64,7 +68,10 @@ public class Robot extends TimedRobot {
     elevatorSensors = new ElevatorSensors();
     ultrasonicSensors = new UltrasonicSensors();
     climber = new Climber();
+    wench = new Wench();
+    suction = new Suction();
     oi = new OI();
+
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
     chooser.addOption("None",new AutoDoNothing());
