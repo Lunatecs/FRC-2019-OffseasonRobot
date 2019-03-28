@@ -15,8 +15,11 @@ import frc.robot.RobotMap;
 
 public class DriveWithJoysticks extends Command {
 
-  public static final double rotationKp = 0.045;
+  public static final double rotationKp = 0.04;
+  public static final double rotationKd = 0.000;
   public static final double maxRotation = 0.65;
+  private double previousError = 0.0;
+  
 
   public DriveWithJoysticks() {
     requires(Robot.drive);
@@ -53,9 +56,9 @@ public class DriveWithJoysticks extends Command {
     
     if(Robot.oi.driverJoystick.getRawButton(RobotMap.RED_BUTTON_ID)) {
       rotation = this.getScaledRotation();
-      if(rotation > maxRotation) {
-        rotation = maxRotation;
-      }
+      //if(rotation > maxRotation) {
+      //  rotation = maxRotation;
+      //}
     }
 
     if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
@@ -68,12 +71,27 @@ public class DriveWithJoysticks extends Command {
   
     }
 
+    SmartDashboard.putNumber("Rotation", rotation);
 
   }
 
   public double getScaledRotation() {
     
-    return (rotationKp * Robot.limelight.getTX());
+    double speed = 0.0;
+    double error = Robot.limelight.getTX();
+
+    speed = (rotationKp * error) + (rotationKd * (previousError - error));
+    
+    SmartDashboard.putNumber("Error", error);
+    SmartDashboard.putNumber("Change in Error", previousError-error);
+
+    this.previousError = error;
+    
+    if((error>.25 || error<-.25)&& Math.abs(speed)<.55) {
+      speed = Math.abs(speed)/speed * .55;
+    }
+
+    return speed;
   }
 
   // Make this return true when this Command no longer needs to run execute()
