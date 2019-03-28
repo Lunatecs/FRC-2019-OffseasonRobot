@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -16,6 +17,7 @@ import frc.robot.RobotMap;
 public class Wench extends Subsystem {
 
   private WPI_VictorSPX wench_V = new WPI_VictorSPX(RobotMap.WENCH_VICTOR_ID);
+  public DoubleSolenoid suctionArm = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
 
   private static NeutralMode WENCH_NEUTRAL_MODE = NeutralMode.Brake;
   
@@ -26,6 +28,14 @@ public class Wench extends Subsystem {
 
   public void setWenchSpeed(double speed){
     wench_V.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void realeaseClimber(){
+    suctionArm.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void secureClimber(){
+    suctionArm.set(DoubleSolenoid.Value.kForward);
   }
 
   @Override
