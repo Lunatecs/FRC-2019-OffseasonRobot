@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.RobotMap;
+import frc.robot.commands.climber.DefaultWench;
 
 public class Wench extends Subsystem {
 
@@ -41,6 +42,6 @@ public class Wench extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new DefaultWench());
   }
 }
