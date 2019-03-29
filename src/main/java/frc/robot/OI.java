@@ -17,9 +17,13 @@ import frc.robot.button.LoneJoystickButton;
 import frc.robot.button.LonePOVButton;
 import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
+import frc.robot.commands.climber.DefaultWench;
 import frc.robot.commands.climber.DriveClimberWheels;
 import frc.robot.commands.climber.DropArms;
 import frc.robot.commands.climber.RaiseArms;
+import frc.robot.commands.climber.ReleaseClimber;
+import frc.robot.commands.climber.SuctionBlow;
+import frc.robot.commands.climber.SuctionSuck;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
 import frc.robot.commands.intake.cargo.DownCargo;
 import frc.robot.commands.intake.cargo.UpCargo;
@@ -95,7 +99,10 @@ public class OI {
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
-    
+ 
+    leftYellowButton.whileActive(new ReleaseClimber());
+    leftGreenButton.whileActive(new SuctionSuck());
+
    // driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
    // driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));
 

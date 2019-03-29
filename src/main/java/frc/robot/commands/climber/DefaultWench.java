@@ -9,6 +9,8 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.OI;
 
 public class DefaultWench extends Command {
   public DefaultWench() {
@@ -24,8 +26,9 @@ public class DefaultWench extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wench.setWenchSpeed(Robot.oi.getClimbSpeed());
-
+    if(Robot.oi.operatorJoystick.getRawButton(RobotMap.LEFT_BUMPER_ID)){
+      Robot.wench.setWenchSpeed(Robot.oi.getClimbSpeed());
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
