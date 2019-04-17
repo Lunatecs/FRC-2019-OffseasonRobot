@@ -20,7 +20,7 @@ public class SuctionSuck extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.suction.setSpeed(1.0);
+    Robot.suction.setSpeed(.375);
   }
 
   // Called repeatedly when this Command is scheduled to run
