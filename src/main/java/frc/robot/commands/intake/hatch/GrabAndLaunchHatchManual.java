@@ -33,7 +33,7 @@ public class GrabAndLaunchHatchManual extends Command {
   protected void execute() {
     if(Robot.hatchIntake.tripLimit() && this.speed>0) {
       //Dont know what will happen if false, not using cancel in subsystem
-      Robot.led.HATCH_INTAKE_COLOR.loopCount=150;
+      Robot.led.HATCH_INTAKE_COLOR.loopCount=100;
       Robot.led.setColor(Robot.led.HATCH_INTAKE_COLOR);
       SmartDashboard.putBoolean("GOT IT", true);
 
