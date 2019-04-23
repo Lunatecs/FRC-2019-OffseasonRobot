@@ -7,13 +7,27 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.autos.AutoDoNothing;
+import frc.robot.commands.autos.AutoHatchStart;
+import frc.robot.subsystems.CargoIntake;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.ElevatorSensors;
+import frc.robot.subsystems.HatchIntake;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.UltrasonicSensors;
+import frc.robot.subsystems.Wench;
+import frc.robot.subsystems.Suction;
+import frc.robot.subsystems.LED;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,22 +37,46 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
+  public static OI oi;
+  public static DriveTrain drive;
+  public static Elevator elevator;
+  public static CargoIntake cargoIntake;
+  public static HatchIntake hatchIntake;
+  public static LED led;
+  public static Limelight limelight;
+  public static ElevatorSensors elevatorSensors;
+  public static UltrasonicSensors ultrasonicSensors;
+  //public static Climber climber;
+  public static Wench wench;
+  public static Suction suction;
 
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
-  public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+  public void robotInit() {   
+    drive = new DriveTrain();
+    elevator = new Elevator();
+    cargoIntake = new CargoIntake();
+    hatchIntake = new HatchIntake();
+    led = new LED();
+    limelight = new Limelight();
+    elevatorSensors = new ElevatorSensors();
+    ultrasonicSensors = new UltrasonicSensors();
+    //climber = new Climber();
+    wench = new Wench();
+    suction = new Suction();
+    oi = new OI();
+
+    SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    chooser.addOption("None",new AutoDoNothing());
+    chooser.addOption("Grab Hatch", new AutoHatchStart());
+    SmartDashboard.putData("Auto mode", chooser);
   }
 
   /**
@@ -60,6 +98,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    SmartDashboard.putBoolean("AUTO FINISHED", false);
   }
 
   @Override
@@ -80,7 +119,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
+    if(m_autonomousCommand != null && this.m_autonomousCommand instanceof AutoHatchStart) {
+      m_autonomousCommand.start();
+    }
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -88,11 +130,6 @@ public class Robot extends TimedRobot {
      * = new MyAutoCommand(); break; case "Default Auto": default:
      * autonomousCommand = new ExampleCommand(); break; }
      */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
   }
 
   /**
@@ -120,6 +157,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    led.countDownColorsInQueue();
+
+
   }
 
   /**
@@ -127,5 +167,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+
   }
 }
