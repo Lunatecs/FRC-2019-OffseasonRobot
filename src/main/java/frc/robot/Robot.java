@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autos.AutoDoNothing;
 import frc.robot.commands.autos.AutoHatchStart;
+import frc.robot.commands.autos.AutoCharacterizeDrivetrain.Direction;
+import frc.robot.commands.autos.AutoCharacterizeDrivetrain.TestMode;
+import frc.robot.commands.autos.AutoCharacterizeDrivetrain;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -72,10 +75,16 @@ public class Robot extends TimedRobot {
     suction = new Suction();
     oi = new OI();
 
+    int QUASITIMEOUT = 30;
+    int STEPTIMEOUT = 30;
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
     chooser.addOption("None",new AutoDoNothing());
     chooser.addOption("Grab Hatch", new AutoHatchStart());
+    chooser.addOption("ACD: QuasiForward", new AutoCharacterizeDrivetrain(TestMode.QUASI_STATIC, Direction.Forward, QUASITIMEOUT));
+    chooser.addOption("ACD: QuasiBackward", new AutoCharacterizeDrivetrain(TestMode.QUASI_STATIC, Direction.Backward, QUASITIMEOUT));
+    chooser.addOption("ACD: StepForward", new AutoCharacterizeDrivetrain(TestMode.STEP_VOLTAGE, Direction.Forward, STEPTIMEOUT));
+    chooser.addOption("ACD: StepBackward", new AutoCharacterizeDrivetrain(TestMode.STEP_VOLTAGE, Direction.Backward, STEPTIMEOUT));
     SmartDashboard.putData("Auto mode", chooser);
   }
 
