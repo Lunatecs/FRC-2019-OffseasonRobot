@@ -22,11 +22,11 @@ public class DriveTrain extends Subsystem {
   private LunatecsDrive drive;
 
   private WPI_VictorSPX leftFront_V = new WPI_VictorSPX(RobotMap.LEFT_FRONT_DRIVE_V_ID);
-  private WPI_TalonSRX leftCenter_T = new WPI_TalonSRX(RobotMap.LEFT_CENTER_DRIVE_T_ID);
+  public WPI_TalonSRX leftCenter_T = new WPI_TalonSRX(RobotMap.LEFT_CENTER_DRIVE_T_ID);
   private WPI_VictorSPX leftBack_V  = new WPI_VictorSPX(RobotMap.LEFT_BACK_DRIVE_V_ID);
 
   private WPI_VictorSPX rightFront_V = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_DRIVE_V_ID);
-  private WPI_TalonSRX rightCenter_T = new WPI_TalonSRX(RobotMap.RIGHT_CENTER_DRIVE_T_ID);
+  public WPI_TalonSRX rightCenter_T = new WPI_TalonSRX(RobotMap.RIGHT_CENTER_DRIVE_T_ID);
   private WPI_VictorSPX rightBack_V = new WPI_VictorSPX(RobotMap.RIGHT_BACK_DRIVE_V_ID);
 
   private static NeutralMode DRIVE_NEUTRAL_MODE = NeutralMode.Brake;
@@ -77,12 +77,30 @@ public class DriveTrain extends Subsystem {
     drive.tankDrive(leftSpeed, rightSpeed);
   }
 
+  public double getLeftEncoderRate() {
+    //returns pos every 100ms
+    return leftCenter_T.getSelectedSensorVelocity(0);
+  }
+  
+  public double getRightEncoderRate() {
+    //returns pos every 100ms
+    return rightCenter_T.getSelectedSensorVelocity(0);
+  }
+
   public double getLeftEncoder() {
     return leftCenter_T.getSelectedSensorPosition(0);
   }
 
   public double getRightEncoder() {
     return rightCenter_T.getSelectedSensorPosition(0);
+  }
+
+  public void setLeftEncoder(int pos){
+    leftCenter_T.setSelectedSensorPosition(pos,0,10);
+  }
+
+  public void setRightEncoder(int pos){
+    rightCenter_T.setSelectedSensorPosition(pos,0,10);
   }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
