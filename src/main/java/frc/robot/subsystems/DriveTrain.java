@@ -77,21 +77,21 @@ public class DriveTrain extends Subsystem {
     drive.tankDrive(leftSpeed, rightSpeed);
   }
 
-  public double getLeftEncoderRate() {
+  public int getLeftEncoderRate() {
     //returns pos every 100ms
     return leftCenter_T.getSelectedSensorVelocity(0);
   }
   
-  public double getRightEncoderRate() {
+  public int getRightEncoderRate() {
     //returns pos every 100ms
     return rightCenter_T.getSelectedSensorVelocity(0);
   }
 
-  public double getLeftEncoder() {
+  public int getLeftEncoder() {
     return leftCenter_T.getSelectedSensorPosition(0);
   }
 
-  public double getRightEncoder() {
+  public int getRightEncoder() {
     return rightCenter_T.getSelectedSensorPosition(0);
   }
 
