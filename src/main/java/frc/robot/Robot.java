@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     int QUASITIMEOUT = 30;
-    int STEPTIMEOUT = 30;
+    int STEPTIMEOUT = 5;
     SmartDashboard.putData(drive);
     // chooser.addOption("My Auto", new MyAutoCommand());
     chooser.addOption("None",new AutoDoNothing());
