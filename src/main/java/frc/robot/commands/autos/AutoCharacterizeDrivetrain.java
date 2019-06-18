@@ -30,13 +30,14 @@ public class AutoCharacterizeDrivetrain extends Command {
 
 	private final TestMode mode;
 	private final Direction direction;
-	private static final double STEPSPEED = 0.5;
+	private static final double STEPSPEED = 0.7;
+	private double scaleDrive=-1;
 
 	public AutoCharacterizeDrivetrain(TestMode mode, Direction direction, double timeout) {
 		requires(Robot.drive);
 		this.mode = mode;
     	this.direction = direction;
-    	setTimeout(timeout);
+		setTimeout(timeout);
 	}
 
 	private FileWriter fw;
@@ -48,40 +49,40 @@ public class AutoCharacterizeDrivetrain extends Command {
 		Robot.drive.setLeftEncoder(0);
 
 		String name;
-		double scale;
 		if (direction.equals(Direction.Forward)) {
 			name = "Forward";
-			scale = 1;
+			//TODO switch for normal robot
+			this.scaleDrive = -1;
 		} else {
 			name = "Backward";
-			scale = -1;
+			this.scaleDrive = 1;
 		}
 
-		String path = "/U/DriveCharacterization/" + name;
-
+		String path = "/tmp/DriveCharacterization_" + name;
+		
 		if (mode.equals(TestMode.QUASI_STATIC)) {
 			System.out.println("QUASI STATIC");
 			System.out.println(Robot.drive.rightCenter_T.configOpenloopRamp(90, 10).name());
 			System.out.println(Robot.drive.leftCenter_T.configOpenloopRamp(90, 10).name());
 			path = path + "QuasiStatic.csv";
 			// voltageStep = 1 / 24.0 / 100.0 * scale;
-			Robot.drive.tankDrive(1 * scale, 1 * scale);
 		} else {
 			System.out.println("STEP");
 			System.out.println(Robot.drive.rightCenter_T.configOpenloopRamp(0, 10).name());
 			System.out.println(Robot.drive.leftCenter_T.configOpenloopRamp(0, 10).name());
 			path = path + "StepVoltage.csv";
-			Robot.drive.tankDrive(STEPSPEED * scale, STEPSPEED * scale);
 		}
+
 		try {
 			File f = new File(path);
 			if (f.exists()) {
 				f.delete();
 			}
+			f.createNewFile();
 			fw = new FileWriter(f, true);
 			fw.write("");
 			fw.flush();
-			fw.write("LeftVolt, LeftVel, LeftAcc, LeftJerk, RightVolt, RightVel, RightAcc, RightJerk\n");
+			//fw.write("LeftVolt, LeftVel, LeftAcc, RightVolt, RightVel, RightAcc\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -94,17 +95,24 @@ public class AutoCharacterizeDrivetrain extends Command {
 	private int i = 0;
 	private int length = 3;
 	private final CircularBuffer accTimeBuff = new CircularBuffer(length);
-	private final CircularBuffer jerkTimeBuff = new CircularBuffer(length);
 	private final CircularBuffer leftVelBuff = new CircularBuffer(length);
 	private final CircularBuffer rightVelBuff = new CircularBuffer(length);
-	private final CircularBuffer leftAccBuff = new CircularBuffer(length);
-	private final CircularBuffer rightAccBuff = new CircularBuffer(length);
+	//private final CircularBuffer leftAccBuff = new CircularBuffer(length);
+	//private final CircularBuffer rightAccBuff = new CircularBuffer(length);
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		if (mode.equals(TestMode.QUASI_STATIC)) {
+			// voltageStep = 1 / 24.0 / 100.0 * scale;
+			Robot.drive.tankDrive(1 * this.scaleDrive, 1 * this.scaleDrive);
+		} else {
+			Robot.drive.tankDrive(STEPSPEED * this.scaleDrive, STEPSPEED * this.scaleDrive);
+			//Robot.drive.tankDrive(-.3,-.3);
+		}
+
 		double time = Timer.getFPGATimestamp();
-		double leftVel = Robot.drive.getLeftEncoderRate();
-		double rightVel = Robot.drive.getRightEncoderRate();
+		double leftVel = Robot.drive.getLeftEncoder();
+		double rightVel = Robot.drive.getRightEncoder();
 		double leftVolt = Robot.drive.leftCenter_T.getMotorOutputVoltage();
 		double rightVolt = Robot.drive.rightCenter_T.getMotorOutputVoltage();
 		accTimeBuff.addLast(time);
@@ -120,29 +128,28 @@ public class AutoCharacterizeDrivetrain extends Command {
 		double rightDv = rightVel - rightVelBuff.removeFirst();
 		double leftAcc = leftDv / dt;
 		double rightAcc = rightDv / dt;
-		jerkTimeBuff.addLast(time);
-		leftAccBuff.addLast(leftAcc);
-		rightAccBuff.addLast(rightAcc);
+		// jerkTimeBuff.addLast(time);
+		// leftAccBuff.addLast(leftAcc);
+		// rightAccBuff.addLast(rightAcc);
 
-		accTimeBuff.addLast(time);
-		leftVelBuff.addLast(leftVel);
-		rightVelBuff.addLast(rightVel);
-		//add delay?
-		dt = time - accTimeBuff.removeFirst();
-		leftDv = leftVel - leftVelBuff.removeFirst();
-		rightDv = rightVel - rightVelBuff.removeFirst();
-		leftAcc = leftDv / dt;
-		rightAcc = rightDv / dt;
+		// accTimeBuff.addLast(time);
+		// leftVelBuff.addLast(leftVel);
+		// rightVelBuff.addLast(rightVel);
+		// //add delay?
+		// dt = time - accTimeBuff.removeFirst();
+		// leftDv = leftVel - leftVelBuff.removeFirst();
+		// rightDv = rightVel - rightVelBuff.removeFirst();
+		// leftAcc = leftDv / dt;
+		// rightAcc = rightDv / dt;
 
-		dt = time - jerkTimeBuff.removeFirst();
-		double leftDa = leftAcc - leftAccBuff.removeFirst();
-		double rightDa = rightAcc - rightAccBuff.removeFirst();
-		double leftJerk = leftDa / dt;
-		double rightJerk = rightDa/ dt;
+		// dt = time - jerkTimeBuff.removeFirst();
+		// double leftDa = leftAcc - leftAccBuff.removeFirst();
+		// double rightDa = rightAcc - rightAccBuff.removeFirst();
+		// double leftJerk = leftDa / dt;
+		// double rightJerk = rightDa / dt;
 
 
-		String result = leftVolt + ", " + leftVel + ", " + leftAcc + ", " + leftJerk + ", " + rightVolt + ", " + rightVel + ", "
-				+ rightAcc + ", " + rightJerk + "\n";
+		String result = leftVolt + ", " + leftVel/12 + ", " + leftAcc/12 + ", " + rightVolt + ", " + rightVel/12 + ", " + rightAcc/12 + ", " + "\n";
 		try {
 			fw.write(result);
 		} catch (IOException e) {
@@ -153,10 +160,11 @@ public class AutoCharacterizeDrivetrain extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-    if (this.isTimedOut()) {
-      return true;
-    }
-		return false;
+    	if (this.isTimedOut()) {
+      		return true;
+    	} else {
+			return false;
+		}
 	}
 
 	// Called once after isFinished returns true
