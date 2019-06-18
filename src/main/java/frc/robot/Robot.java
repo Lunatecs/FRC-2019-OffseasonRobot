@@ -75,9 +75,10 @@ public class Robot extends TimedRobot {
     suction = new Suction();
     oi = new OI();
 
-    int QUASITIMEOUT = 30;
-    int STEPTIMEOUT = 5;
+    double QUASITIMEOUT = 30;
+    double STEPTIMEOUT = 9;
     SmartDashboard.putData(drive);
+
     // chooser.addOption("My Auto", new MyAutoCommand());
     chooser.addOption("None",new AutoDoNothing());
     chooser.addOption("Grab Hatch", new AutoHatchStart());
@@ -94,10 +95,12 @@ public class Robot extends TimedRobot {
    * autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * LiveWindow and SmartDashboard integrated updating
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Left Encoder", drive.getLeftEncoder());
+    SmartDashboard.putNumber("Right Encoder", drive.getRightEncoderRate());
   }
 
   /**
@@ -131,7 +134,10 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = chooser.getSelected();
     if(m_autonomousCommand != null && this.m_autonomousCommand instanceof AutoHatchStart) {
       m_autonomousCommand.start();
+    } else if (m_autonomousCommand != null && this.m_autonomousCommand instanceof AutoCharacterizeDrivetrain) {
+      m_autonomousCommand.start();
     }
+
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
