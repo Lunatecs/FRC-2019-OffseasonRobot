@@ -14,6 +14,7 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -28,8 +29,11 @@ public class DriveTrain extends Subsystem {
   private WPI_VictorSPX rightFront_V = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_DRIVE_V_ID);
   public WPI_TalonSRX rightCenter_T = new WPI_TalonSRX(RobotMap.RIGHT_CENTER_DRIVE_T_ID);
   private WPI_VictorSPX rightBack_V = new WPI_VictorSPX(RobotMap.RIGHT_BACK_DRIVE_V_ID);
+  public WPI_TalonSRX elevatorLead = new WPI_TalonSRX(RobotMap.ELEVATOR_LEAD_CONTROLLER_T_ID);
 
   private static NeutralMode DRIVE_NEUTRAL_MODE = NeutralMode.Brake;
+
+  private PigeonIMU pigeonGyro = new PigeonIMU(rightCenter_T);
 
   public DriveTrain(){
 
@@ -59,6 +63,9 @@ public class DriveTrain extends Subsystem {
 
     this.rightCenter_T.configOpenloopRamp(.25, 10);
     this.leftCenter_T.configOpenloopRamp(.25, 10);
+
+    elevatorLead.configFactoryDefault();
+    elevatorLead.setNeutralMode(DRIVE_NEUTRAL_MODE);
     
     drive = new LunatecsDrive(leftCenter_T, rightCenter_T);
   }
@@ -84,7 +91,7 @@ public class DriveTrain extends Subsystem {
   
   public int getRightEncoderRate() {
     //returns pos every 100ms
-    return rightCenter_T.getSelectedSensorVelocity(0);
+    return elevatorLead.getSelectedSensorVelocity(0);
   }
 
   public int getLeftEncoder() {
@@ -92,7 +99,14 @@ public class DriveTrain extends Subsystem {
   }
 
   public int getRightEncoder() {
-    return rightCenter_T.getSelectedSensorPosition(0);
+    return elevatorLead.getSelectedSensorPosition(0);
+  }
+
+  public double getAngle() {
+    double[] ypr = new double[3];
+    pigeonGyro.getYawPitchRoll(ypr);
+    //TODO find which data getAngle should return based on position
+    return ypr[0];
   }
 
   public void setLeftEncoder(int pos){
