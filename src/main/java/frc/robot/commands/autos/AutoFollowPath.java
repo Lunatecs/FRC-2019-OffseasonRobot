@@ -44,7 +44,7 @@ public class AutoFollowPath extends Command {
       double leftSpeed = leftFollower.calculate(Robot.drive.getLeftEncoder());
       double rightSpeed = rightFollower.calculate(Robot.drive.getRightEncoder());
       //TODO get angle from gyro correctly
-      double heading = gyro.getAngle();
+      double heading = Robot.drive.getAngle();
       double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
       double headingDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
       double turn = 0.8 * (-1.0/80.0) * headingDifference;
@@ -59,7 +59,7 @@ public class AutoFollowPath extends Command {
       leftTrajectory = PathfinderFRC.getTrajectory(this.pathName + ".left");
       rightTrajectory = PathfinderFRC.getTrajectory(this.pathName + ".right");
     } catch (IOException e) {
-      System.out.println("IOExeception occured: " + e.getMessage());
+      e.printStackTrace();
     }
 
     leftFollower = new EncoderFollower(leftTrajectory);
