@@ -49,7 +49,10 @@ public class DriveWithJoysticks extends Command {
       speed = speed * .85;
       rotation = rotation * .85;
 
-    } 
+    } else {
+      //Always scale rotation to 85% if not using slow modes
+      rotation = rotation * .85;
+    }
     
     if(Robot.oi.driverJoystick.getRawButton(RobotMap.RED_BUTTON_ID)) {
       rotation = this.getScaledRotation();
