@@ -10,40 +10,27 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-
-//Allows for full control over climber for up and down. Used to test limit switches etc.
-public class MoveClimberManual extends Command {
-
-  private double climberSpeed = 0.0;
-
-  public MoveClimberManual() {
+public class ReleaseClimber extends Command {
+  public ReleaseClimber() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.wench);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.wench.realeaseClimber();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-        //------------------Climber------------------
-    //TODO check if negative is down and positive is up on climber or swap
-
-    //If toplimit and trying to go up(positive), stop from going up
-    if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
-      Robot.climber.stopClimberLift();
-    } else {
-      Robot.climber.setLiftSpeed(Robot.oi.getClimbSpeed());
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

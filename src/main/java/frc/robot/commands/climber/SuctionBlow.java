@@ -7,29 +7,32 @@
 
 package frc.robot.commands.climber;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class RaiseArms extends Command {
-  public RaiseArms() {
-    requires(Robot.climber);
+public class SuctionBlow extends Command {
+  public SuctionBlow() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.suction);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climber.raiseArms();
+    Robot.suction.setSpeed(-.375);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -42,4 +45,11 @@ public class RaiseArms extends Command {
   @Override
   protected void interrupted() {
   }
+
+  @Override
+  public void cancel(){
+    super.cancel();
+    Robot.suction.setSpeed(0.0);
+  }
+
 }

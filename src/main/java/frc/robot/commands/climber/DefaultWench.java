@@ -10,52 +10,24 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-//Controls both elevator and lift during lift period
-public class LiftRobotManual extends Command {
+import frc.robot.OI;
 
-  //Speed should be 0.5
-  private double climberSpeed = 0.0;
-  private double elevatorSpeed = 0.0;
-  private boolean isFinished = false;
-  private boolean isClimberFinished = false;
-  private boolean isElevatorFinished = false;
-
-
-  public LiftRobotManual() {
+public class DefaultWench extends Command {
+  public DefaultWench() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.climber);
+    requires(Robot.wench);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    this.climberSpeed = 0.0;
-    this.elevatorSpeed = 0.0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    //TODO add deadband?
-    this.climberSpeed = Robot.oi.getClimbSpeed();
-    this.elevatorSpeed = (Robot.oi.getClimbSpeed() * 0.577);
-    
-    //------------------Climber------------------
-    //TODO check if negative is down and positive is up on climber or swap
-
-    //If toplimit and trying to go up(positive), stop from going up
-    if(Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
-
-      //TODO needs a minimum lift speed to keep us up(fighting springs)
-      Robot.climber.stopClimberLift();
-    } else {
-      Robot.climber.setLiftSpeed(this.climberSpeed);
-    }
-
-    if(!Robot.oi.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
-    //------------------Elevator------------------
-      Robot.elevator.setSpeed(this.elevatorSpeed, .3);
+    if(Robot.oi.operatorJoystick.getRawButton(RobotMap.LEFT_BUMPER_ID)){
+      Robot.wench.setWenchSpeed(Robot.oi.getClimbSpeed());
     }
   }
 

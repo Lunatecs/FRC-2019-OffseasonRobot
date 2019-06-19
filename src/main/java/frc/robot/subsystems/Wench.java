@@ -7,15 +7,18 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.RobotMap;
+import frc.robot.commands.climber.DefaultWench;
 
 public class Wench extends Subsystem {
 
   private WPI_VictorSPX wench_V = new WPI_VictorSPX(RobotMap.WENCH_VICTOR_ID);
+  public DoubleSolenoid suctionArm = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
 
   private static NeutralMode WENCH_NEUTRAL_MODE = NeutralMode.Brake;
   
@@ -28,9 +31,17 @@ public class Wench extends Subsystem {
     wench_V.set(ControlMode.PercentOutput, speed);
   }
 
+  public void realeaseClimber(){
+    suctionArm.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void secureClimber(){
+    suctionArm.set(DoubleSolenoid.Value.kForward);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new DefaultWench());
   }
 }

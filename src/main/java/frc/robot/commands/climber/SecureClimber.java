@@ -10,40 +10,27 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftClimber extends Command {
-
-  private boolean isFinished = false;
-  private double climberSpeed = 0.0;
-
-  public LiftClimber(double speed) {
+public class SecureClimber extends Command {
+  public SecureClimber() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.climber);
-    this.climberSpeed = speed;
+    requires(Robot.wench);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    this.isFinished = false;
+    Robot.wench.secureClimber();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //------------------Climber------------------
-    if (Robot.climber.getLimitSwitch() && Robot.climber.isPastRequiredDistance()) {
-      Robot.climber.stopClimberLift();
-      isFinished = true;
-    } else {
-      Robot.climber.setLiftSpeed(this.climberSpeed);
-      isFinished = false;
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isFinished;
+    return true;
   }
 
   // Called once after isFinished returns true

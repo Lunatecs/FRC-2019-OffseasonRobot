@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   public static Limelight limelight;
   public static ElevatorSensors elevatorSensors;
   public static UltrasonicSensors ultrasonicSensors;
-  public static Climber climber;
+  //public static Climber climber;
   public static Wench wench;
   public static Suction suction;
 
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
     elevatorSensors = new ElevatorSensors();
     ultrasonicSensors = new UltrasonicSensors();
-    climber = new Climber();
+    //climber = new Climber();
     wench = new Wench();
     suction = new Suction();
     oi = new OI();
