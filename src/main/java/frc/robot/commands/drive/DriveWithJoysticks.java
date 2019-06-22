@@ -64,16 +64,17 @@ public class DriveWithJoysticks extends Command {
       //}
     }
 
-    if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
+    // if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
   
-      Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());     
+    //   Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());     
   
-    } else {
+    // } else {
   
-      Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
+    //   Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
   
-    }
+    // }
 
+    Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
     SmartDashboard.putNumber("Rotation", rotation);
 
   }
