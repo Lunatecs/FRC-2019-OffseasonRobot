@@ -8,6 +8,7 @@
 package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.climber.RetractClimber;
 import frc.robot.commands.intake.hatch.ExtendHatch;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchAuto;
 
@@ -17,6 +18,7 @@ public class AutoHatchStart extends CommandGroup {
    */
   public AutoHatchStart() {
     
+    addSequential(new RetractClimber());
     addSequential(new ExtendHatch());
     addSequential(new GrabAndLaunchHatchAuto(1.0,1.5));
     // Add Commands here:
