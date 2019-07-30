@@ -52,7 +52,10 @@ public class DriveWithJoysticks extends Command {
       speed = speed * .85;
       rotation = rotation * .85;
 
-    } 
+    } else {
+      //Always scale rotation to 85% if not using slow modes
+      rotation = rotation * .85;
+    }
     
     if(Robot.oi.driverJoystick.getRawButton(RobotMap.RED_BUTTON_ID)) {
       rotation = this.getScaledRotation();
@@ -61,16 +64,17 @@ public class DriveWithJoysticks extends Command {
       //}
     }
 
-    if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
+    // if(Robot.oi.driverJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
   
-      Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());     
+    //   Robot.drive.tankDrive(Robot.oi.getRightspeed(), Robot.oi.getLeftSpeed());     
   
-    } else {
+    // } else {
   
-      Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
+    //   Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
   
-    }
+    // }
 
+    Robot.drive.arcadeDriveWithoutEncoders(speed, rotation, false);
     SmartDashboard.putNumber("Rotation", rotation);
 
   }

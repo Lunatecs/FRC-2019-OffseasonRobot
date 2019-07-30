@@ -27,7 +27,13 @@ public class DefaultWench extends Command {
   @Override
   protected void execute() {
     if(Robot.oi.operatorJoystick.getRawButton(RobotMap.LEFT_BUMPER_ID)){
-      Robot.wench.setWenchSpeed(Robot.oi.getClimbSpeed());
+      double speed = Robot.oi.getClimbSpeed();
+      if (speed > .25) {
+        speed = .25;
+      } else if (speed < -.25) {
+        speed = -.25;
+      }
+      Robot.wench.setWenchSpeed(speed);
     }
   }
 

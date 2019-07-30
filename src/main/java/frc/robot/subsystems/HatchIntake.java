@@ -32,8 +32,8 @@ public class HatchIntake extends Subsystem {
     hatchWheel.configFactoryDefault();
     hatchWheel.setNeutralMode(WHEELS_BRAKE_MODE);
     hatchWheel.configVoltageCompSaturation(12);
-    hatchWheel.configPeakCurrentLimit(20, 10);
-    hatchWheel.configPeakCurrentDuration(500, 10);
+    hatchWheel.configPeakCurrentLimit(40, 10);
+    hatchWheel.configPeakCurrentDuration(100, 10);
     hatchWheel.configContinuousCurrentLimit(0, 10);
     hatchWheel.enableCurrentLimit(true);
     this.isExtended = false;

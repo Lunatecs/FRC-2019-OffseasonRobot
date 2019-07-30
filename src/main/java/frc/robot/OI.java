@@ -18,7 +18,9 @@ import frc.robot.button.LonePOVButton;
 import frc.robot.commands.autos.AutoClimb;
 import frc.robot.commands.autos.AutoDrivetrain;
 import frc.robot.commands.climber.DefaultWench;
+import frc.robot.commands.climber.ExtendClimber;
 import frc.robot.commands.climber.ReleaseClimber;
+import frc.robot.commands.climber.RetractClimber;
 import frc.robot.commands.climber.SecureClimber;
 import frc.robot.commands.climber.SuctionBlow;
 import frc.robot.commands.climber.SuctionSuck;
@@ -46,8 +48,10 @@ public class OI {
   public Joystick driverJoystick = new Joystick(RobotMap.DRIVER_JOYSTICK_USB_ID);
   public Joystick operatorJoystick = new Joystick(RobotMap.OPERATOR_JOYSTICK_USB_ID);
   
-  JoystickButton driverRedButton = new JoystickButton(driverJoystick, RobotMap.RED_BUTTON_ID); 
+  JoystickButton driverYellowButton = new JoystickButton(driverJoystick, RobotMap.YELLOW_BUTTON_ID); 
   JoystickButton driverGreenButton = new JoystickButton(driverJoystick, RobotMap.GREEN_BUTTON_ID); 
+  JoystickButton driverRightBumperButton = new JoystickButton(driverJoystick, RobotMap.RIGHT_BUMPER_ID);
+  JoystickButton driverLeftBumperButton = new JoystickButton(driverJoystick, RobotMap.LEFT_BUMPER_ID);
 
   JoystickButton greenButton = new JoystickButton(operatorJoystick, RobotMap.GREEN_BUTTON_ID);
   JoystickButton redButton = new JoystickButton(operatorJoystick, RobotMap.RED_BUTTON_ID);
@@ -63,6 +67,7 @@ public class OI {
   DoubleJoystickButton leftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
   DoubleJoystickButton leftBlueButton = new DoubleJoystickButton(leftBumperButton, blueButton);
 
+  DoubleJoystickButton driverLeftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
   DoubleJoystickButton rightYellowButton = new DoubleJoystickButton(rightBumperButton, yellowButton);
   DoubleJoystickButton rightRedButton = new DoubleJoystickButton(rightBumperButton, redButton);
   DoubleJoystickButton rightGreenButton = new DoubleJoystickButton(rightBumperButton, greenButton);
@@ -92,18 +97,14 @@ public class OI {
     loneGreenButton.whileActive(new GrabAndLaunchHatchManual(1.0));
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
+    leftGreenButton.whileActive(new SuctionSuck());
 
+    driverRightBumperButton.whileActive(new GrabAndLaunchHatchManual(-1.0));
+    driverYellowButton.whenActive(new RetractClimber());
+    driverGreenButton.whenActive(new ExtendClimber());
 
     upPOV.whenActive(new UpCargo());
     downPOV.whenActive(new DownCargo());
- 
-    leftYellowButton.whenActive(new ReleaseClimber());
-    leftGreenButton.whenActive(new SuctionSuck());
-
-    secureClimberButtons.whenActive(new SecureClimber());
-
-    leftRedButton.whileActive(new SuctionBlow());
-    leftBlueButton.whenActive(new ReleaseAndSuck());
 
    // driverUpPOV.whileActive(new DriveClimberWheels(0.25,0.25, 20.0));
    // driverDownPOV.whileActive(new DriveClimberWheels(-0.25,-0.25, 20.0));

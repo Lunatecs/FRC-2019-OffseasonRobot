@@ -10,30 +10,27 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SuctionSuck extends Command {
-  public SuctionSuck() {
+public class RetractClimber extends Command {
+  public RetractClimber() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.suction);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.suction.setSpeed(.375);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.climber.retractLift();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return true;
-    //This will never be true
-    //^^^^^^^ that was a lie
   }
 
   // Called once after isFinished returns true
@@ -45,11 +42,5 @@ public class SuctionSuck extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-  }
-
-  @Override
-  public void cancel() {
-    super.cancel();
-    Robot.suction.setSpeed(0);
   }
 }
