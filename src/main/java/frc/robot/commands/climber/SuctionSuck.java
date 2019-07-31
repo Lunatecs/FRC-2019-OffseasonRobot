@@ -46,4 +46,10 @@ public class SuctionSuck extends Command {
   @Override
   protected void interrupted() {
   }
+
+  @Override
+  public void cancel() {
+    super.cancel();
+    Robot.suction.setSpeed(0);
+  }
 }

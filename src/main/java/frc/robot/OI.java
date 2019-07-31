@@ -67,6 +67,7 @@ public class OI {
   DoubleJoystickButton leftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
   DoubleJoystickButton leftBlueButton = new DoubleJoystickButton(leftBumperButton, blueButton);
 
+  DoubleJoystickButton driverLeftGreenButton = new DoubleJoystickButton(leftBumperButton, greenButton);
   DoubleJoystickButton rightYellowButton = new DoubleJoystickButton(rightBumperButton, yellowButton);
   DoubleJoystickButton rightRedButton = new DoubleJoystickButton(rightBumperButton, redButton);
   DoubleJoystickButton rightGreenButton = new DoubleJoystickButton(rightBumperButton, greenButton);
@@ -96,6 +97,7 @@ public class OI {
     loneGreenButton.whileActive(new GrabAndLaunchHatchManual(1.0));
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
+    leftGreenButton.whileActive(new SuctionSuck());
 
     driverRightBumperButton.whileActive(new GrabAndLaunchHatchManual(-1.0));
     driverYellowButton.whenActive(new RetractClimber());
