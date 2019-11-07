@@ -32,6 +32,9 @@ public class RobotMap {
   
   public static int ELEVATOR_LEAD_CONTROLLER_T_ID   = 7;
   public static int ELEVATOR_FOLLOW_CONTROLLER_V_ID = 6;
+
+  //public static int CLIMBER_RELEASE_FORWARD_ID = 0;
+  //public static int CLIMBER_RELEASE_BACKWARD_ID = 7;
   
   //right back climb
   public static int CLIMBER_PUSHDOWN_CONTROLLER_V_ID = 19; //4;
@@ -92,6 +95,8 @@ public class RobotMap {
   public static double POTENTIOMETER_LOWERLIMIT = 385.0;
 
   public static int LED_PWM_ID = 3;
+
+  public static int PRESSER_ANALOG_ID = 0;
 
   /* This is stuff I don't know whether on not we CARE or not,
   BUT this is just to be useful if we have a complete nuclear fallout

@@ -18,7 +18,7 @@ import frc.robot.commands.climber.DefaultWench;
 public class Wench extends Subsystem {
 
   private WPI_VictorSPX wench_V = new WPI_VictorSPX(RobotMap.WENCH_VICTOR_ID);
-  //public DoubleSolenoid suctionArm = new DoubleSolenoid(RobotMap.CLARMS_FORWARD_ID, RobotMap.CLARMS_BACKWARD_ID);
+  //public DoubleSolenoid suctionArm = new DoubleSolenoid(RobotMap.CLIMBER_RELEASE_FORWARD_ID, RobotMap.CLIMBER_RELEASE_BACKWARD_ID);
 
   private static NeutralMode WENCH_NEUTRAL_MODE = NeutralMode.Brake;
   

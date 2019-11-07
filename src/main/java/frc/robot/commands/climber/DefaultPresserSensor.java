@@ -9,13 +9,12 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DefaultWench extends Command {
-  public DefaultWench() {
+public class DefaultPresserSensor extends Command {
+  public DefaultPresserSensor() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.wench);
+    requires(Robot.presserSensor);
   }
 
   // Called just before this Command runs the first time
@@ -26,19 +25,24 @@ public class DefaultWench extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.operatorJoystick.getRawButton(RobotMap.LEFT_BUMPER_ID)){
-      double speed = Robot.oi.getClimbSpeed();
-      /*if (speed > .25) {
-        speed = .25;
-      } else if (speed < -.25) {
-        speed = -.25;
-      }*/
-      if(Robot.oi.operatorJoystick.getRawButton(RobotMap.RIGHT_BUMPER_ID)) {
-        speed = speed/2.0;
-      }
+    SmartDashboard.putNumber("Presser", Robot.presserSensor.getAirPressurePsi());
 
-      Robot.wench.setWenchSpeed(speed);
+    if(Robot.presserSensor.getAirPressurePsi() < -2.0 ) {
+      Robot.led.setColor(Robot.led.SUCTION_ACHIEVED);
     }
+
+    if(Robot.presserSensor.getAirPressurePsi() < -6.0) {
+      Robot.led.setColor(Robot.led.CLIMBING_COMPLETE);
+    }
+
+    if(Robot.presserSensor.getAirPressurePsi() > -4.0) {
+      Robot.led.removeColor(Robot.led.CLIMBING_COMPLETE);
+    }
+
+    if(Robot.presserSensor.getAirPressurePsi() > -2.0) {     
+      Robot.led.removeColor(Robot.led.SUCTION_ACHIEVED);
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

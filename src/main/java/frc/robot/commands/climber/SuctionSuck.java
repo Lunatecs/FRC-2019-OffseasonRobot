@@ -50,6 +50,6 @@ public class SuctionSuck extends Command {
   @Override
   public void cancel() {
     super.cancel();
-    Robot.suction.setSpeed(0);
+    //Robot.suction.setSpeed(0);
   }
 }

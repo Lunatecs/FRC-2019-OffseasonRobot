@@ -23,6 +23,7 @@ import frc.robot.commands.climber.ReleaseClimber;
 import frc.robot.commands.climber.RetractClimber;
 import frc.robot.commands.climber.SecureClimber;
 import frc.robot.commands.climber.SuctionBlow;
+import frc.robot.commands.climber.SuctionStop;
 import frc.robot.commands.climber.SuctionSuck;
 import frc.robot.commands.climber.ReleaseAndSuck;
 import frc.robot.commands.intake.hatch.GrabAndLaunchHatchManual;
@@ -97,7 +98,10 @@ public class OI {
     loneGreenButton.whileActive(new GrabAndLaunchHatchManual(1.0));
     loneRedButton.whenActive(new ExtendHatch());
     loneBlueButton.whenActive(new RetractHatch());
+    leftBlueButton.whenActive(new ReleaseClimber());
+    leftRedButton.whenActive(new SecureClimber());
     leftGreenButton.whileActive(new SuctionSuck());
+    leftYellowButton.whileActive(new SuctionStop());
 
     driverRightBumperButton.whileActive(new GrabAndLaunchHatchManual(-1.0));
     driverYellowButton.whenActive(new RetractClimber());
